@@ -1,0 +1,37 @@
+<div>
+<div class="panel-body">
+  <div class="form-wrapper">
+  <div class="panel panel-skin">
+    <div class="panel-heading">
+      <div class="service-iconh">
+        <span class="fa fa-user-md"></span>
+      </div>
+      <h4 class="panel-title"> Your's Last Visit Details </h4>
+      </div>
+    </div>
+  </div>
+
+    <table>
+      <tbody>
+        <tr  *ngFor="let pt of patientservice.newlist | slice:0:1">
+            <td><b>Lab No:</b>&nbsp;{{pt.labno}} <b>  &nbsp;&nbsp;&nbsp;&nbsp; Visit Date:&nbsp;</b>{{pt.sampledate}}
+              <div class="current-visit-fixed">
+                <table class="table">
+                    <tbody>
+                      <tr *ngFor="let pt of patientservice.newlist" >
+                        <td>{{pt.testname}}</td>  
+                        <td>
+                            <div *ngIf='pt.rptstatus=="Ok"'><a class="text-white"><i class="fa fa-check"></i></a></div>
+                            <div *ngIf='pt.rptstatus=="No"'><a class="text-white"><i class="fa fa-close"></i></a></div>
+                        </td>
+                        <td (click)="loadReport(pt)"><div *ngIf='pt.rptstatus=="Ok"'><a  class="text-white"><i class="fa fa-print"></i></a></div> </td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

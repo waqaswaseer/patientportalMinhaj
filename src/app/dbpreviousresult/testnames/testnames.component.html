@@ -1,0 +1,18 @@
+
+<div class="panel-body">
+    <div class="all-testname">
+    <table  class="table">
+        <thead class="table-heading panel-heading" >
+            <tr>
+                <th>Your's Tests</th>
+              </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pt of patientservice.aTests" >
+            <td (click)="loadTestDetail(pt.testcode)">{{pt.testname}}</td>  
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+      

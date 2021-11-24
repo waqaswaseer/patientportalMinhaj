@@ -1,0 +1,99 @@
+<div id="headernewimage">
+    <img class="headernewimage" src="assets/bodybg/logo10.png" alt="" />
+</div>
+<div class="bg-info tab-container">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Patient Portal">
+            <div class="form-wrapper loginform ">
+                <div class="panel panel-skin">
+                    <div class="panel-heading ">
+                        <div class="service-iconh">
+                            <span class="fa fa-user fa-2x"></span>
+                        </div>
+                        <h3 class="panel-title">Patient Portal </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div role="form" class="contactForm lead">
+
+                            <div *ngIf="isLoginError" class="red-text center error-message">
+                                <i class="material-icons">error</i> Incorrect Patient No or Online Code
+                            </div>
+                            <form #patientForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(pUserName.value,onlineCode.value)">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input type="text" #pUserName ngModel name="pUserName" placeholder="Patient No" class="form-control ng-untouched ng-pristine ng-valid" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field  col s12">
+                                        <i class="material-icons prefix">vpn_key</i>
+                                        <input type="password" #onlineCode ngModel name="onlineCode" placeholder="Online Code" required>
+                                    </div>
+                                </div>
+                                <div class="row loginbutton">
+                                    <div class="input-field">
+                                        Click Here to <br><a (click)="getonlinecode()">Get Online Code</a>
+                                    </div>
+                                    <div class="input-field">
+                                        <button [disabled]="!patientForm.valid" class="btn btn-primary btn-large primary-btn-width" type="submit">Login</button>
+                                    </div>
+                                </div>
+                                <!-- <div class="Registerbutton">
+                                    Click Here to &nbsp;<a (click)="getonlinecode()">Get Register</a>
+                                </div> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="User Portal">
+            <div class="form-wrapper  loginform">
+                <div class="panel panel-skin">
+                    <div class="panel-heading ">
+                        <div class="service-iconh">
+                            <span class="fa fa-user fa-2x"></span>
+                        </div>
+                        <h3 class="panel-title">User Portal </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div role="form" class="contactForm lead">
+
+                            <div *ngIf="isLoginError" class="red-text center error-message">
+                                <i class="material-icons">error</i> Incorrect Patient No or Online Code
+                            </div>
+                            <form #userForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input type="text" #UserName ngModel name="UserName" placeholder="User Name" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field  col s12">
+                                        <i class="material-icons prefix">vpn_key</i>
+                                        <input type="password" #Password ngModel name="Password" placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="row loginbutton">
+                                    <div class="input-field ">
+                                        Click Here to <br><a (click)="getonlinecode()">Forget Password</a>
+                                    </div>
+                                    <div class="input-field ">
+                                        <button [disabled]="!userForm.valid" class="btn btn-primary btn-large primary-btn-width" type="submit">SignIn</button>
+                                    </div>
+                                </div>
+                                <div class="Registerbutton">
+                                    Click Here to &nbsp;<a (click)="signup()">Get Register</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>

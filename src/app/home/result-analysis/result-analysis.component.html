@@ -1,0 +1,60 @@
+<div class="panel-body">
+<!-- <div class="row">
+    <div class="col-lg-12"> -->
+    <div style="display: block" class="table-responsive">
+      <table class="table">
+        <thead class="table-heading panel-heading" >
+        <tr>
+          <th></th>
+          <th>Parameter Name</th>
+          <th *ngFor="let pt of patientservice.labnoList">{{pt.visitno}}</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let pt of patientservice.presult">
+        <tr>
+          <td (click)="loadChartResult(pt.parametercode)"><a class="text-white"><i class="fa fa-bar-chart"></i></a></td>
+          <td>{{pt.parametername}}</td>
+          <td>
+            <div *ngIf='pt.rem1=="H"' class="red">{{pt.result1}}</div>
+            <div *ngIf='pt.rem1=="L"' class="blue">{{pt.result1}}</div>
+            <div *ngIf='pt.rem1==" "'>{{pt.result1}}</div>
+          </td>
+          <td>
+            <div *ngIf='pt.rem2=="H"' class="red">{{pt.result2}}</div>
+            <div *ngIf='pt.rem2=="L"' class="blue">{{pt.result2}}</div>
+            <div *ngIf='pt.rem2==" "'>{{pt.result2}}</div>
+          </td>
+          <td>
+            <div *ngIf='pt.rem3=="H"' class="red">{{pt.result3}}</div>
+            <div *ngIf='pt.rem3=="L"' class="blue">{{pt.result3}}</div>
+            <div *ngIf='pt.rem3==" "'>{{pt.result3}}</div>
+          
+          </td>
+          <td>
+          
+            <div *ngIf='pt.rem4=="H"' class="red">{{pt.result4}}</div>
+            <div *ngIf='pt.rem4=="L"' class="blue">{{pt.result4}}</div>
+            <div *ngIf='pt.rem4==" "'>{{pt.result4}}</div>
+          
+          </td>
+          <td>
+          
+            <div *ngIf='pt.rem5=="H"' class="red">{{pt.result5}}</div>
+            <div *ngIf='pt.rem5=="L"' class="blue">{{pt.result5}}</div>
+            <div *ngIf='pt.rem5==" "'>{{pt.result5}}</div>
+          
+          </td>
+        </tr>
+      </tbody>
+      </table>
+      <!-- <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"></canvas> -->
+    <!-- </div>
+</div>
+ -->
+</div>
+  

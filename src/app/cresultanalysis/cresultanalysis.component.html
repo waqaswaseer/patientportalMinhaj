@@ -1,0 +1,57 @@
+<div class="panel-body">
+<div class="row">  
+    <div class="col-md-6">
+        <div class="form-wrapper">
+            <div class="panel panel-skin">
+              <div class="panel-heading">
+                <div class="service-iconh">
+                  <span class="fa fa-user-md"></span>
+                </div>
+
+                <h4 class="panel-title">Abnormal Profile Test</h4>
+              </div>
+            </div>
+          </div>
+                      <table class="table">
+                          <tbody>
+                            <tr *ngFor="let pt of patientservice.pabnormal" >
+                              <td>{{pt.testname}}</td>  
+                              <td>{{pt.parametername}}</td>
+                              <td>
+                                <div *ngIf='pt.resultstatus=="High"' class="red">{{pt.result}}</div>
+                                <div *ngIf='pt.resultstatus=="Low"' class="blue">{{pt.result}}</div>
+                                </td>
+                              <td>{{pt.resultstatus}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+               
+    </div>
+    <div class="col-md-6">
+        <div class="form-wrapper">
+            <div class="panel panel-skin">
+              <div class="panel-heading">
+                <div class="service-iconh">
+                  <span class="fa fa-user-md"></span>
+                </div>
+                <h4 class="panel-title">Abnormal Single Tests </h4>
+                </div>
+              </div>
+            </div>
+
+            <table class="table">
+              <tbody>
+                <tr *ngFor="let pt of patientservice.sabnormal" >
+                  <td>{{pt.testname}}</td>  
+                  <td>
+                    <div *ngIf='pt.resultstatus=="High"' class="red">{{pt.result}}</div>
+                    <div *ngIf='pt.resultstatus=="Low"' class="blue">{{pt.result}}</div>
+                    </td>
+                  <td>{{pt.resultstatus}}</td>
+                </tr>
+              </tbody>
+          </table>
+
+    </div>
+</div> 
+</div>
