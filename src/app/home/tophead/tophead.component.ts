@@ -49,6 +49,9 @@ pvisits(){
 testwiseresults(){
   this.router.navigate(['result-analysis']);
 }
+testbooking(){
+  this.router.navigate(['test-booking']);
+}
 
 homepage(){
   this.router.navigate(['home']);

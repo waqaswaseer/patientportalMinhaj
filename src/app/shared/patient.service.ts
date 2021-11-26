@@ -1,4 +1,4 @@
-import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode } from './patient.model';
+import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket } from './patient.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
@@ -39,9 +39,10 @@ export class PatientService {
   aTests : AllTestNames[];
   sResults : SingleTestResult[];
   gCode : Getonlinecode[];
-
-  //readonly rootUrl = 'http://localhost:7569/'; //'http://192.168.10.16:1032/patientapi/';
-  readonly rootUrl = 'http://103.62.233.169:5685/';
+  signup : usersignup[]
+  alltest : Labtests[]
+  readonly rootUrl = 'http://localhost:7569/'; //'http://192.168.10.16:1032/patientapi/';
+  // readonly rootUrl = 'http://103.62.233.169:5685/';
   constructor(private http: HttpClient) { }
 
   userAuthentication(userName, password) {
@@ -54,7 +55,18 @@ export class PatientService {
     return  this.http.get(this.rootUrl+'/api/GetUserClaims',{headers : new HttpHeaders(
       {'Authorization' : 'Bearer ' + localStorage.getItem('userToken')})});
    }
-
+   userSignUp() {
+    var body = {
+      ...this.signup,
+    };
+    return this.http.post(this.rootUrl + 'api/signup', body);
+  }
+  GetAlllabtest():Observable<Labtests[]> {
+    return this.http.get<Labtests[]>(this.rootUrl + 'api/labtests');
+  }
+  GetOrderdetails(username:string|null):Observable<PendingBasket[]> {
+    return this.http.get<PendingBasket[]>(this.rootUrl + 'api/pendingbasket/'+username);
+  }
    allVisitsList(pno : string){
     this.http.get(this.rootUrl + pno)
     .toPromise().then(res => this.list = res as Patient[]);

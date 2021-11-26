@@ -38,6 +38,44 @@ layout
     background-color: #fff;
 }
 
+.colSignup {
+    width: 50%;
+}
+
+.radio_buton {
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+}
+
+.radio_buttons {
+    display: flex;
+    flex-direction: row;
+    /* background-color: rgb(0, 255, 34); */
+    width: 50%;
+}
+
+#form-wrapper {
+    background-color: #fdffff54;
+}
+
+.form-container {
+    padding-bottom: 50px;
+    border-radius: 10px;
+    background-color: rgba(251, 251, 251, 0.534);
+}
+
+mat-toolbar {
+    justify-content: center;
+    display: flex;
+}
+
+@media (max-width: 500) {
+    #wrapper.boxed {
+        width: 100%;
+    }
+}
+
 @media (max-width: 767px) {
     #wrapper.boxed {
         width: 100%;
@@ -1147,7 +1185,7 @@ canvas {
 
 form.lead label,
 form.lead input {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .panel-body {
@@ -1395,8 +1433,6 @@ Elements
 --- Works
 ============================ */
 
-#owl-works {}
-
 .item {
     margin: 10px;
 }
@@ -1424,7 +1460,7 @@ Testimonial
 }
 
 .carousel-control.left {
-    top: left: -25px;
+    top: left -25px;
 }
 
 .carousel-control.right {
@@ -1918,57 +1954,6 @@ a.scrollup i:hover {
 }
 
 
-/* --- scroll --- */
-
-.page-scroll .btn-circle i.animated {
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1s;
-    -moz-transition-property: -moz-transform;
-    -moz-transition-duration: 1s;
-}
-
-.page-scroll .btn-circle:hover i.animated {
-    -webkit-animation-name: pulse;
-    -moz-animation-name: pulse;
-    -webkit-animation-duration: 1.5s;
-    -moz-animation-duration: 1.5s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-timing-function: linear;
-}
-
-@-webkit-keyframes pulse {
-    0 {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-    50% {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-}
-
-@-moz-keyframes pulse {
-    0 {
-        -moz-transform: scale(1);
-        transform: scale(1);
-    }
-    50% {
-        -moz-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-    100% {
-        -moz-transform: scale(1);
-        transform: scale(1);
-    }
-}
-
-
 /* blink btn */
 
 .blink {
@@ -2380,11 +2365,7 @@ a.btn:focus {
 .tab-container {
     border-radius: 5px;
     justify-content: center;
-}
-
-mat-tab-group {}
-
-.loginform {
+    /* background-color: #01FF70; */
     margin-left: 20%;
     margin-right: 20%;
 }
@@ -2401,12 +2382,13 @@ mat-tab-group {}
 #headernewimage {
     display: flex;
     justify-content: center;
-    /* background-color: red; */
 }
 
 .headernewimage {
     width: 40%;
     height: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .Registerbutton {
@@ -2416,6 +2398,16 @@ mat-tab-group {}
 
 
 /* Theme Styler :: End */
+
+.alignleft {
+    float: left;
+    margin-left: 20px;
+}
+
+.alignright {
+    float: right;
+    margin-right: 20px;
+}
 
 
 /* Media queries */
@@ -2436,10 +2428,13 @@ mat-tab-group {}
     #logohide {
         display: none;
     }
+    #newexample {
+        max-width: 30%;
+    }
     .loginPage {
         margin-top: 20px;
     }
-    .loginform {
+    .tab-container {
         margin-left: 15%;
         margin-right: 15%;
     }
@@ -2451,12 +2446,27 @@ mat-tab-group {}
     .headernewimage {
         width: 40%;
         height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 }
+
+
+/* @media (min-width:767px) and (max-width:1039px) {
+    #newexample {
+        max-width: 30%;
+    }
+    #logohide {
+        display: none;
+    }
+} */
 
 @media (min-width:481px) and (max-width:767px) {
     #newexample {
         display: none;
+    }
+    #logohide {
+        max-width: 35%;
     }
     .top-area p {
         text-align: center;
@@ -2525,13 +2535,15 @@ mat-tab-group {}
     .loginPage {
         margin-top: 15px;
     }
-    .loginform {
+    .tab-container {
         margin-left: 10%;
         margin-right: 10%;
     }
     .headernewimage {
         width: 70%;
         height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 }
 
@@ -2548,6 +2560,9 @@ mat-tab-group {}
     #newexample {
         display: none;
     }
+    #logohide {
+        max-width: 80%;
+    }
     .box {
         padding: 45px;
     }
@@ -2557,13 +2572,15 @@ mat-tab-group {}
     .loginPage {
         margin-top: 10px;
     }
-    .loginform {
+    .tab-container {
         margin-left: 2%;
         margin-right: 2%;
     }
     .headernewimage {
         width: 80%;
         height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 }
 
@@ -2586,7 +2603,9 @@ mat-tab-group {}
         margin-top: 10px;
     }
     .headernewimage {
-        width: 90%;
+        width: 100%;
         height: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 }

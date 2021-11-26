@@ -1,6 +1,6 @@
 export class Patient {
     labno: string;
-    sampledate : string;
+    sampledate: string;
     companyname: string;
     totalbill: number;
     receivedamount: number;
@@ -10,44 +10,44 @@ export class Patient {
     pdfbill: string;
 }
 
-export class CurrentVisitData{
-    labno :string;
+export class CurrentVisitData {
+    labno: string;
     sampledate: string;
     testname: string;
-    rptstatus : string;
-    pdfurl : string;
+    rptstatus: string;
+    pdfurl: string;
 }
 
-export class Getonlinecode{
-    mobileno :string;
+export class Getonlinecode {
+    mobileno: string;
     onlinecode: string;
     firstname: string;
 }
 
-export class AbnormalTestResults{
-    labno :string;
+export class AbnormalTestResults {
+    labno: string;
     testname: string;
     parametername: string;
-    result : string;
-    comments : string;
-    resultstatus : string;
+    result: string;
+    comments: string;
+    resultstatus: string;
 }
 
-export class AllLabNo{
-    computerno :string;
+export class AllLabNo {
+    computerno: string;
     visitno: string;
 
 }
 
-export class AllTestNames{
-    testcode :string;
+export class AllTestNames {
+    testcode: string;
     testname: string;
 
 }
 
 
-export class PreviousResult{
-    testcode :string;
+export class PreviousResult {
+    testcode: string;
     parametercode: string;
     sortorder: string;
     testname: string;
@@ -64,12 +64,41 @@ export class PreviousResult{
     rem5: string;
 }
 
-export class SingleTestResult{
-    computerno :string;
+export class SingleTestResult {
+    computerno: string;
     fulllabno: string;
     result: string;
     minivalue: string;
     maxvalue: string;
 
 
+}
+export class usersignup {
+    username: string;
+    age: string;
+    gender: string;
+    mobileno: string;
+    email: string;
+    password: string;
+    address: string;
+}
+export class patientlogin {
+    firstname: string;
+    patientno: string;
+    mobileno: string;
+    age: string;
+    gendername: string;
+    nic: string;
+    address1: string;
+}
+export class Labtests {
+    testcode: string;
+    testname: string;
+    price: string;
+    specimen: string;
+}
+export class PendingBasket{
+    testcode: String;
+    testname : string;
+    price : string;
 }

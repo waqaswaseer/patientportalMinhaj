@@ -1,49 +1,44 @@
-<div id="wrapper" class="container">
-    <div class="intro-content">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                    <div class="form-wrapper">
-                        <div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s"></div>
-                        <div class="panel panel-skin">
-                            <div class="panel-heading ">
-                                <div class="service-iconh">
-                                    <span class="fa fa-user fa-2x"></span>
-                                  </div>
-                                <h3 class="panel-title">Get Online Code </h3>
-                                </div>
-                                <div class="panel-body">
-                            <div role="form" class="contactForm lead"> 
-                                   
-                                <div *ngIf="isLoginError" class="red-text center error-message">
-                                    <i class="material-icons">error</i> Incorrect Patient No
-                                </div>
-                                <form #loginForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value)">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                          <i class="material-icons prefix">account_circle</i>
-                                          <input type="text" #UserName ngModel name="UserName" placeholder="Patient No" required>
-                                        </div>
-                                      </div>
-                                    <div class="row">
-                                        <div class="input-field  col s12" *ngIf='msgsent'>
-                                            SMS has been sent on your's registered Mobile No. Click on <a (click)="goback()">Login</a> or press send button again
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field  col s12">
-                                          <button [disabled]="!loginForm.valid" class="btn-large btn-skin btn-submit" type="submit">Send Code</button>
-                                        </div>
-                                      </div>
-                                </form> 
-                            </div>
-                                </div>
-                        </div>
-                    </div>
+<div id="headernewimage">
+    <img class="headernewimage" src="assets/bodybg/logo10.png" alt="" />
+</div>
+<div class="loginPage">
+    <div class="form-wrapper loginform">
+        <div class="panel panel-skin">
+            <div class="panel-heading ">
+                <div class="service-iconh">
+                    <span class="fa fa-user fa-2x"></span>
+                </div>
+                <h3 class="panel-title">Get Online Code </h3>
             </div>
+            <div class="panel-body">
+                <div role="form" class="contactForm lead">
 
-
+                    <div *ngIf="isLoginError" class="red-text center error-message">
+                        <i class="material-icons">error</i> Incorrect Patient No
+                    </div>
+                    <form #loginForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value)">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input type="text" #UserName ngModel name="UserName" placeholder="Patient No" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field  col s12" *ngIf='msgsent'>
+                                SMS has been sent on your's registered Mobile No. Click on <a (click)="goback()">Login</a> or press send button again
+                            </div>
+                        </div>
+                        <div class="row btn-Container">
+                            <div class="">
+                                <button class="btn btn-secondary alignleft" (click)="goback()" type="submit">Cancel</button>
+                            </div>
+                            <div class="">
+                                <button [disabled]="!loginForm.valid" class="btn btn-primary alignright" type="submit">Send Code</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-        
-    
 </div>

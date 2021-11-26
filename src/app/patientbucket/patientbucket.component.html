@@ -1,0 +1,74 @@
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-wrapper">
+                <div class="panel panel-skin">
+                    <div class="panel-heading">
+                        <div class="service-iconh">
+                            <span class="fa fa-user-md"></span>
+                        </div>
+
+                        <h4 class="panel-title">Availible Lab Tests</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="example-full-width">
+                <input type="text" placeholder="Test Name" aria-label="Test" matInput [formControl]="Test" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="testselecion($event)" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option.testname}}</mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="example-full-width">
+                <input type="text" placeholder="Price" aria-label="Rate" [formControl]="price" readonly>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-wrapper">
+                <div class="panel panel-skin">
+                    <div class="panel-heading">
+                        <div class="service-iconh">
+                            <span class="fa fa-user-md"></span>
+                        </div>
+                        <h4 class="panel-title">Patient Bucket</h4>
+                    </div>
+                </div>
+            </div>
+            <form class="example-form form2" [style.fontSize.px]="14 ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">TEST CODE</th>
+                            <th scope="col">TEST NAME</th>
+                            <th scope="col">PRICE</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="pendingtest?.length==0" [class.text-danger]="pendingtest?.length==0">
+                            <td class="font-italic text-center mt-5" colspan="5">
+                                No test is Selected yet
+                            </td>
+                        </tr>
+                        <tr *ngFor="let test of pendingtest">
+                            <td>{{test.testcode}}</td>
+                            <td>{{test.testname}}</td>
+                            <td>{{test.price}}</td>
+                            <td>
+                                <a></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <!-- {{this.getuserID()}}userID -->
+            <div class="mr-2 ml-2 mt-3 input-group-append justify-content-center row ">
+                <button class="btn btn-outline-success ">Book Now</button>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>

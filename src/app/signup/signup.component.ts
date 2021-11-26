@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PatientService } from '../shared/patient.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,30 +11,42 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 export class SignupComponent implements OnInit {
   // SIGNUPDETAIL: FormGroup
   signupForm: FormGroup;
-  invalidNamesArr: string[] = ['Hello', 'Angular'];
-  constructor() { }
+  favoriteSeason: string;
+  Genders: string[] = ['Male', 'Female'];
+  invalidNamesArr: string[] = ['Hello', 'Angular',' '];
+  constructor(public router : Router, public service : PatientService) { }
 
   ngOnInit() {
     this.resetForm()
   }
-  onSubmit(signupForm) {
-    console.log(this.signupForm);
-    console.log(this.signupForm.get('user_name').value);
+  onSubmit(signupForm:FormGroup) {
+    if (this.signupForm.valid){
+      this.service.signup = this.signupForm.getRawValue()
+      console.log(this.service.signup);
+      this.service.userSignUp().subscribe(Response => {
+        if (Response != 0) {
+          // this.notificationService.success(':: Registered successfully');
+          alert("Saved SuccessFully")
+          this.router.navigate(['login'])
+        }
+        else {
+          // this.notificationService.warn(':: Invalid Data');
+        }
+      })
+      this.resetForm();
+      // console.log(this.signupForm.get('user_name').value);
+    }
     }
   resetForm() {
     this.signupForm = new FormGroup({
-      user_name: new FormControl(null, [Validators.required,this.invalidNameValidation.bind(this)]),
-      user_email: new FormControl(null, [Validators.email, Validators.required]),
-
-      password_group: new FormGroup({
-            user_password: new FormControl(null, [Validators.required]),
-            user_confirmPassword: new FormControl(null, [Validators.required]),
-        }),
-
-      user_phone: new FormControl(null),
-      user_gender: new FormControl('Male'),
-      user_city: new FormControl('Ahmedabad', [Validators.required]),
-      user_notification: new FormControl('email')
+      username: new FormControl(null, [Validators.required,this.invalidNameValidation.bind(this)]),
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+      user_confirmPassword: new FormControl(null, [Validators.required]),
+      mobileno: new FormControl(null),
+      gender: new FormControl(''),
+      address: new FormControl('', [Validators.required]),
+      age: new FormControl('')
 
 });
   }
@@ -41,5 +55,8 @@ export class SignupComponent implements OnInit {
       return {invalidName: true};
     }
     return null;
+  }
+  cancel(){
+    this.router.navigate(['login'])
   }
 }

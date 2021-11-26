@@ -30,7 +30,13 @@ import { XComponent } from './x/x.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { TestBookingComponent } from './test-booking/test-booking.component';
+import { PatientbucketComponent } from './patientbucket/patientbucket.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +55,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopheadComponent,
     OnlinecodeComponent,
     XComponent,
-    SignupComponent
+    SignupComponent,
+    TestBookingComponent,
+    PatientbucketComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +70,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatTabsModule,
     ReactiveFormsModule,
+    MatRadioModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule
+    
     
   ],
   entryComponents : [ResultchartComponent],
