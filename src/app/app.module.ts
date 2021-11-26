@@ -37,6 +37,7 @@ import { PatientbucketComponent } from './patientbucket/patientbucket.component'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { PlaceorderComponent } from './placeorder/placeorder.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { MatInputModule } from '@angular/material/input';
     XComponent,
     SignupComponent,
     TestBookingComponent,
-    PatientbucketComponent
+    PatientbucketComponent,
+    PlaceorderComponent
   ],
   imports: [
     BrowserModule,

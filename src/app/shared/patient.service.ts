@@ -1,4 +1,4 @@
-import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket } from './patient.model';
+import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail } from './patient.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
@@ -27,6 +27,7 @@ export class PatientService {
   straddress: string ='';
   strmobileno : string ='';
   strpatientno : string ='';
+  Orderdetails:orderdetail;
 
   formData : Patient;
   list : Patient[];
@@ -41,6 +42,8 @@ export class PatientService {
   gCode : Getonlinecode[];
   signup : usersignup[]
   alltest : Labtests[]
+  pendingtest: PendingBasket[]
+
   readonly rootUrl = 'http://localhost:7569/'; //'http://192.168.10.16:1032/patientapi/';
   // readonly rootUrl = 'http://103.62.233.169:5685/';
   constructor(private http: HttpClient) { }
@@ -66,6 +69,18 @@ export class PatientService {
   }
   GetOrderdetails(username:string|null):Observable<PendingBasket[]> {
     return this.http.get<PendingBasket[]>(this.rootUrl + 'api/pendingbasket/'+username);
+  }
+
+  addtobucket() {
+    var body = {
+      ...this.Orderdetails,
+    };
+    return this.http.post(this.rootUrl + 'api/Bookorder', body);
+  }
+  getPendingOrders() {
+    this.GetOrderdetails(this.username).subscribe((data: any) => {
+      this.pendingtest = data;
+    });
   }
    allVisitsList(pno : string){
     this.http.get(this.rootUrl + pno)
@@ -199,5 +214,7 @@ export class PatientService {
   // changeMessage(message: string) {
   //   this.messageSource.next(message)
   // }
-  
+  get username() {
+    return localStorage.getItem('lspname')
+  }
 }

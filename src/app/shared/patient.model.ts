@@ -97,8 +97,14 @@ export class Labtests {
     price: string;
     specimen: string;
 }
-export class PendingBasket{
+export class PendingBasket {
     testcode: String;
-    testname : string;
-    price : string;
+    testname: string;
+    price: string;
+}
+export class orderdetail {
+    username: string;
+    testname: string;
+    testcode: string;
+    price: string;
 }

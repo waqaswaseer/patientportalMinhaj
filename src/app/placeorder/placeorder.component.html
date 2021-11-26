@@ -1,0 +1,26 @@
+<div class="form-wrapper" id="form-wrapper">
+    <div class="panel panel-skin">
+        <div class="panel-heading">
+            <div class="service-iconh">
+                <span class="fa fa-user-md"></span>
+            </div>
+            <h4 class="panel-title">Availible Lab Tests</h4>
+        </div>
+    </div>
+    <form class="example-form form2" [formGroup]="Orderdetails" [style.fontSize.px]="14" (ngSubmit)="addtoBucket(Orderdetails)">
+        <div class="testform">
+            <input type="text" placeholder="Select Test" aria-label="Number" matInput [formControl]="testname" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption [displayWith]="displayFn" (optionSelected)="testselecion($event)" #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.testname}}
+                </mat-option>
+            </mat-autocomplete>
+            <div class="example-full-width">
+                <input type="text" placeholder="Price" aria-label="Rate" formControlName="price" readonly>
+            </div>
+        </div>
+        <div class="btnbucket">
+            <button class="btn btn-outline-success" type="submit">Add To bucket</button>
+        </div>
+    </form>
+</div>
