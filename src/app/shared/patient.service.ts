@@ -43,6 +43,8 @@ export class PatientService {
   signup : usersignup[]
   alltest : Labtests[]
   pendingtest: PendingBasket[]
+  userprofile : usersignup[]
+  showToggle : Boolean = true;
 
   readonly rootUrl = 'http://localhost:7569/'; //'http://192.168.10.16:1032/patientapi/';
   // readonly rootUrl = 'http://103.62.233.169:5685/';
@@ -64,6 +66,9 @@ export class PatientService {
     };
     return this.http.post(this.rootUrl + 'api/signup', body);
   }
+  Getuserprofile(username:string|null):Observable<usersignup[]> {
+    return this.http.get<usersignup[]>(this.rootUrl + 'api/getuserProfile/' + username);
+  }
   GetAlllabtest():Observable<Labtests[]> {
     return this.http.get<Labtests[]>(this.rootUrl + 'api/labtests');
   }
@@ -77,15 +82,7 @@ export class PatientService {
     };
     return this.http.post(this.rootUrl + 'api/Bookorder', body);
   }
-  getPendingOrders() {
-    this.GetOrderdetails(this.username).subscribe((data: any) => {
-      this.pendingtest = data;
-    });
-  }
-   allVisitsList(pno : string){
-    this.http.get(this.rootUrl + pno)
-    .toPromise().then(res => this.list = res as Patient[]);
-  }
+  
 
   CurrentVisitsList(pno: string){
     this.http.get(this.rootUrl + "api/LastVisit/" + pno)
@@ -216,5 +213,23 @@ export class PatientService {
   // }
   get username() {
     return localStorage.getItem('lspname')
+  }
+
+
+
+  geruserProfile() {
+    this.showToggle = false;
+    this.Getuserprofile(this.username).subscribe((data: any) => {
+      this.userprofile = data;
+    });
+  }
+  getPendingOrders() {
+    this.GetOrderdetails(this.username).subscribe((data: any) => {
+      this.pendingtest = data;
+    });
+  }
+   allVisitsList(pno : string){
+    this.http.get(this.rootUrl + pno)
+    .toPromise().then(res => this.list = res as Patient[]);
   }
 }

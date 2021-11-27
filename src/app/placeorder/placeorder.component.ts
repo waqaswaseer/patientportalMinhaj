@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Labtests } from '../shared/patient.model';
+import { Labtests, usersignup } from '../shared/patient.model';
 import { PatientService } from '../shared/patient.service';
 
 @Component({
@@ -12,18 +13,20 @@ import { PatientService } from '../shared/patient.service';
   styleUrls: ['./placeorder.component.css']
 })
 export class PlaceorderComponent implements OnInit {
-  Orderdetails: FormGroup;  
+  Orderdetails: FormGroup;
   testname = new FormControl();
   options: Labtests[] 
   filteredOptions: Observable<Labtests[]>;
-  rfilteredOptions: Observable<Labtests[]>;
+  userprofile : usersignup
   displayFn(subject: any): string {
     return subject ? subject.testname : ''
   }
   rdisplayFn(rname) : string {
     return rname ? rname.testname :'';
   }  
-  constructor(public gservice: PatientService) { }
+  constructor(public gservice: PatientService, public router : Router) {
+    
+   }
 
   ngOnInit(): void {
     this.createForm();
@@ -48,6 +51,7 @@ export class PlaceorderComponent implements OnInit {
   }
 
   addtoBucket(Orderdetails: FormGroup) {
+    
     if (this.Orderdetails.valid) {
       this.gservice.Orderdetails = this.Orderdetails.getRawValue()
       console.log(this.gservice.Orderdetails)
@@ -82,7 +86,11 @@ export class PlaceorderComponent implements OnInit {
       price: new FormControl(0),
     });
   }
+  
   get username() {
     return localStorage.getItem('lspname')
+  }
+  editdata(){
+    this.router.navigate(['/signup'])
   }
 }

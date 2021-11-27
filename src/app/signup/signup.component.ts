@@ -31,9 +31,9 @@ export class SignupComponent implements OnInit {
         }
         else {
           // this.notificationService.warn(':: Invalid Data');
+          this.resetForm();
         }
       })
-      this.resetForm();
       // console.log(this.signupForm.get('user_name').value);
     }
     }

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Labtests, PendingBasket } from '../shared/patient.model';
+import { Labtests, PendingBasket, usersignup } from '../shared/patient.model';
 import { PatientService } from '../shared/patient.service';
 
 @Component({
@@ -15,8 +15,11 @@ export class PatientbucketComponent implements OnInit {
   constructor(public gservice: PatientService) { }
 
   ngOnInit() {
-    this.gservice.getPendingOrders();    
+    this.gservice.getPendingOrders();
+    this.gservice.pendingtest;    
+  }  
+  get username() {
+    return localStorage.getItem('lspname')
   }
-  
 }
 

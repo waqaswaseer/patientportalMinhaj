@@ -24,3 +24,47 @@
         </div>
     </form>
 </div>
+<div [hidden]="this.gservice.showToggle" class="col-md-12" id="form-wrapper1">
+    <div class="form-wrapper">
+        <div class="panel panel-skin">
+            <div class="panel-heading">
+                <div class="service-iconh">
+                    <span class="fa fa-user-md"></span>
+                </div>
+                <h4 class="panel-title">Check Out</h4>
+            </div>
+            <a class="editinfo" (click)="editdata()">Edit Address</a>
+        </div>
+    </div>
+    <form class="example-form form2" [style.fontSize.px]="14 ">
+        <table class="table" id="table">
+            <tbody *ngFor="let user of this.gservice.userprofile">
+                <tr>
+                    <th scope="col">PATIENT NAME:</th>
+                    <td [colSpan]="4">{{user.username}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">AGE:</th>
+                    <td>{{user.age}}</td>
+                    <th scope="col">GENDER:</th>
+                    <td>{{user.gender}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="col">PHONE NO:</th>
+                    <td>{{user.mobileno}}</td>
+                    <th scope="col">TOTAL BILL:</th>
+                    <td>Rs. {{user.password}}/-</td>
+                </tr>
+                <tr>
+                    <th scope="col">Patient Address:</th>
+                    <td [colSpan]="4">{{user.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <!-- {{this.getuserID()}}userID -->
+    <div class="btnbucket">
+        <button class="btn btn-outline-success">Check Out</button>
+    </div>
+</div>

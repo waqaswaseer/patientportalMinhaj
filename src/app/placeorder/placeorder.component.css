@@ -16,3 +16,11 @@
 #form-wrapper {
     min-height: 200px;
 }
+
+#form-wrapper1 {
+    min-height: 400px;
+}
+
+.editinfo {
+    float: right;
+}
