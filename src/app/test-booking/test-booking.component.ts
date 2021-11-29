@@ -10,6 +10,7 @@ export class TestBookingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

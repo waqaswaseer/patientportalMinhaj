@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from '../notification.service';
 import { PatientService } from '../shared/patient.service';
 
 @Component({
@@ -11,10 +12,11 @@ import { PatientService } from '../shared/patient.service';
 export class SignupComponent implements OnInit {
   // SIGNUPDETAIL: FormGroup
   signupForm: FormGroup;
-  favoriteSeason: string;
   Genders: string[] = ['Male', 'Female'];
   invalidNamesArr: string[] = ['Hello', 'Angular',' '];
-  constructor(public router : Router, public service : PatientService) { }
+  constructor(public router : Router, public service : PatientService,
+    private notificationService: NotificationService, 
+    ) { }
 
   ngOnInit() {
     this.resetForm()
@@ -25,12 +27,11 @@ export class SignupComponent implements OnInit {
       console.log(this.service.signup);
       this.service.userSignUp().subscribe(Response => {
         if (Response != 0) {
-          // this.notificationService.success(':: Registered successfully');
-          alert("Saved SuccessFully")
+          this.notificationService.success(':: Registered successfully');
           this.router.navigate(['login'])
         }
         else {
-          // this.notificationService.warn(':: Invalid Data');
+          this.notificationService.warn(':: Invalid Data');
           this.resetForm();
         }
       })

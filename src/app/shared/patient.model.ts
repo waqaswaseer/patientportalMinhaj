@@ -108,3 +108,14 @@ export class orderdetail {
     testcode: string;
     price: string;
 }
+export class marker {
+	lat: number;
+	lng: number;
+	label?: string;
+	draggable: boolean;
+}
+export class Address {
+    username: string;
+    address: string;
+    city: string;
+}

@@ -1,4 +1,4 @@
-import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail } from './patient.model';
+import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail, Address } from './patient.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
@@ -45,7 +45,7 @@ export class PatientService {
   pendingtest: PendingBasket[]
   userprofile : usersignup[]
   showToggle : Boolean = true;
-
+  newaddress: Address
   readonly rootUrl = 'http://localhost:7569/'; //'http://192.168.10.16:1032/patientapi/';
   // readonly rootUrl = 'http://103.62.233.169:5685/';
   constructor(private http: HttpClient) { }
@@ -65,6 +65,12 @@ export class PatientService {
       ...this.signup,
     };
     return this.http.post(this.rootUrl + 'api/signup', body);
+  }
+  updateAddress() {
+    var body = {
+      ...this.newaddress,
+    };
+    return this.http.post(this.rootUrl + 'api/newaddress', body);
   }
   Getuserprofile(username:string|null):Observable<usersignup[]> {
     return this.http.get<usersignup[]>(this.rootUrl + 'api/getuserProfile/' + username);

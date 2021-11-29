@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
-
 import { ChartsModule} from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -38,6 +37,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { PlaceorderComponent } from './placeorder/placeorder.component';
+import { GmapComponent } from './gmap/gmap.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,8 @@ import { PlaceorderComponent } from './placeorder/placeorder.component';
     SignupComponent,
     TestBookingComponent,
     PatientbucketComponent,
-    PlaceorderComponent
+    PlaceorderComponent,
+    GmapComponent
   ],
   imports: [
     BrowserModule,
@@ -76,12 +79,14 @@ import { PlaceorderComponent } from './placeorder/placeorder.component';
     MatToolbarModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    MatInputModule
-    
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
     
   ],
   entryComponents : [ResultchartComponent],
   providers: [PatientService,AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

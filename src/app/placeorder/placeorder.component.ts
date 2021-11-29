@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { GmapComponent } from '../gmap/gmap.component';
+import { NotificationService } from '../notification.service';
 import { Labtests, usersignup } from '../shared/patient.model';
 import { PatientService } from '../shared/patient.service';
 
@@ -15,24 +18,30 @@ import { PatientService } from '../shared/patient.service';
 export class PlaceorderComponent implements OnInit {
   Orderdetails: FormGroup;
   testname = new FormControl();
-  options: Labtests[] 
+  options: Labtests[]
   filteredOptions: Observable<Labtests[]>;
-  userprofile : usersignup
+  userprofile: usersignup
   displayFn(subject: any): string {
     return subject ? subject.testname : ''
   }
-  rdisplayFn(rname) : string {
-    return rname ? rname.testname :'';
-  }  
-  constructor(public gservice: PatientService, public router : Router) {
-    
-   }
+  rdisplayFn(rname): string {
+    return rname ? rname.testname : '';
+  }
+
+  lat = 51.678418;
+  lng = 7.809007;
+  googleMapType = 'satellite';
+  constructor(public gservice: PatientService, public router: Router,
+    private notificationService: NotificationService,  public dialog: MatDialog) {
+
+  }
 
   ngOnInit(): void {
     this.createForm();
+    // this.gservice.geruserProfile();
   }
 
-  createForm(){
+  createForm() {
     this.resetPage()
     this.gservice.GetAlllabtest().subscribe((res: any) => {
       this.options = res;
@@ -51,19 +60,18 @@ export class PlaceorderComponent implements OnInit {
   }
 
   addtoBucket(Orderdetails: FormGroup) {
-    
     if (this.Orderdetails.valid) {
       this.gservice.Orderdetails = this.Orderdetails.getRawValue()
       console.log(this.gservice.Orderdetails)
       this.gservice.addtobucket().subscribe(Response => {
         if (Response != 0) {
-          alert('Your order For test' + this.Orderdetails.controls["testname"].value + 
-           " is booked for now")
-         // this.notificationService.success(':: Your order is placed successfully');
+          this.gservice.getPendingOrders();
+          this.notificationService.success('Your order For test' + this.Orderdetails.controls["testname"].value +
+          " is booked for now");
         }
         else {
-          alert(this.Orderdetails.controls["testname"].value + 'order is invalid or already booked')
-          //this.notificationService.warn(':: Invalid Data');
+          this.resetPage();
+          this.notificationService.warn(this.Orderdetails.controls["testname"].value + 'order is invalid or already booked');
         }
       })
     }
@@ -71,9 +79,9 @@ export class PlaceorderComponent implements OnInit {
   }
 
   getAllLabtest() {
-    
+
   }
-  onSubmit(){
+  onSubmit() {
     this.resetPage();
     alert('Please Login First')
     console.warn(this.Orderdetails.value);
@@ -81,16 +89,19 @@ export class PlaceorderComponent implements OnInit {
   resetPage() {
     this.Orderdetails = new FormGroup({
       username: new FormControl(this.username),
-      testcode: new FormControl(),
-      testname: new FormControl(''),
-      price: new FormControl(0),
+      testcode: new FormControl(null),
+      testname: new FormControl(null),
+      price: new FormControl(null),
     });
   }
-  
+
   get username() {
     return localStorage.getItem('lspname')
   }
-  editdata(){
-    this.router.navigate(['/signup'])
+  changeAddress() {
+    this.dialog.open(GmapComponent).afterClosed().subscribe(res => {
+      this.gservice.geruserProfile();
+    }
+    )
   }
 }
