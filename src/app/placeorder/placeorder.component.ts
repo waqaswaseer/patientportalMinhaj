@@ -38,7 +38,6 @@ export class PlaceorderComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    // this.gservice.geruserProfile();
   }
 
   createForm() {
@@ -58,8 +57,7 @@ export class PlaceorderComponent implements OnInit {
     this.Orderdetails.controls["price"].setValue(selectedValue.price);
     this.Orderdetails.controls["testcode"].setValue(selectedValue.testcode);
   }
-
-  addtoBucket(Orderdetails: FormGroup) {
+  addtoBucket(Orderdetails: FormGroup, ) {
     if (this.Orderdetails.valid) {
       this.gservice.Orderdetails = this.Orderdetails.getRawValue()
       console.log(this.gservice.Orderdetails)
@@ -78,9 +76,6 @@ export class PlaceorderComponent implements OnInit {
     //this.resetPage()
   }
 
-  getAllLabtest() {
-
-  }
   onSubmit() {
     this.resetPage();
     alert('Please Login First')
@@ -100,8 +95,11 @@ export class PlaceorderComponent implements OnInit {
   }
   changeAddress() {
     this.dialog.open(GmapComponent).afterClosed().subscribe(res => {
-      this.gservice.geruserProfile();
+      this.gservice.getuserProfile();
     }
     )
+  }
+  checkout(){
+    
   }
 }

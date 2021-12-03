@@ -26,7 +26,7 @@ constructor(public service:PatientService, public dialogRef: MatDialogRef<GmapCo
   private notificationService: NotificationService,  ){}
   ngOnInit() {
     this.resetForm()
-    this.service.geruserProfile();
+    this.service.getuserProfile();
 
   }
   onSubmit(signupForm: FormGroup) {

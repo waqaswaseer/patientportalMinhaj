@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification.service';
 import { PatientService } from '../shared/patient.service';
@@ -11,20 +11,39 @@ import { PatientService } from '../shared/patient.service';
 })
 export class SignupComponent implements OnInit {
   // SIGNUPDETAIL: FormGroup
-  signupForm: FormGroup;
+  signupForm;
+  submitted:false;
   Genders: string[] = ['Male', 'Female'];
   invalidNamesArr: string[] = ['Hello', 'Angular',' '];
   constructor(public router : Router, public service : PatientService,
-    private notificationService: NotificationService, 
+    private notificationService: NotificationService, private formBuilder: FormBuilder
     ) { }
 
   ngOnInit() {
     this.resetForm()
   }
-  onSubmit(signupForm:FormGroup) {
-    if (this.signupForm.valid){
-      this.service.signup = this.signupForm.getRawValue()
-      console.log(this.service.signup);
+  
+  resetForm() {
+    this.signupForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      email:  ['', Validators.required,Validators.email],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      user_confirmPassword: ['', Validators.required],
+      mobileno:['', Validators.required],
+      gender: ['', Validators.required],
+      address:['', Validators.required],
+      age: ['', Validators.required],
+
+},
+   {
+  validator: MustMatch('password', 'user_confirmPassword')
+});
+  }
+  onSubmit() {
+    console.log(this.signupForm.value);
+    
+      this.service.signup = this.signupForm.value
+      console.log(this.signupForm.value);
       this.service.userSignUp().subscribe(Response => {
         if (Response != 0) {
           this.notificationService.success(':: Registered successfully');
@@ -36,28 +55,36 @@ export class SignupComponent implements OnInit {
         }
       })
       // console.log(this.signupForm.get('user_name').value);
-    }
-    }
-  resetForm() {
-    this.signupForm = new FormGroup({
-      username: new FormControl(null, [Validators.required,this.invalidNameValidation.bind(this)]),
-      email: new FormControl(null, [Validators.email, Validators.required]),
-      password: new FormControl(null, [Validators.required]),
-      user_confirmPassword: new FormControl(null, [Validators.required]),
-      mobileno: new FormControl(null),
-      gender: new FormControl(''),
-      address: new FormControl('', [Validators.required]),
-      age: new FormControl('')
-
-});
-  }
-  invalidNameValidation(control: AbstractControl): {[key: string]: boolean} {
-    if (this.invalidNamesArr.indexOf(control.value) >= 0) {
-      return {invalidName: true};
-    }
-    return null;
-  }
+    // }
+    
+   }
   cancel(){
     this.router.navigate(['login'])
+    this.submitted = false;
+    this.resetForm();
+  }
+
+  get f(){
+    return this.signupForm.controls;
+  }
+}
+
+
+export function MustMatch(controlName: string, matchingControlName: string) {
+  return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+          // return if another validator has already found an error on the matchingControl
+          return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+          matchingControl.setErrors({ mustMatch: true });
+      } else {
+          matchingControl.setErrors(null);
+      }
   }
 }

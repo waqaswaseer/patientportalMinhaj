@@ -40,6 +40,8 @@ import { PlaceorderComponent } from './placeorder/placeorder.component';
 import { GmapComponent } from './gmap/gmap.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MyLoaderComponent } from './home/my-loader/my-loader.component';
+import { LoaderInterceptorService } from './shared/interceptors/loader-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +64,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     TestBookingComponent,
     PatientbucketComponent,
     PlaceorderComponent,
-    GmapComponent
+    GmapComponent,
+    MyLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -81,12 +84,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    // AppRoutingModule,
     
   ],
   entryComponents : [ResultchartComponent],
-  providers: [PatientService,AuthGuard],
+  providers: [PatientService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
+    AuthGuard],
   bootstrap: [AppComponent],
-  //schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

@@ -98,7 +98,9 @@ export class Labtests {
     specimen: string;
 }
 export class PendingBasket {
-    testcode: String;
+    username:string;
+    orderid: string;
+    testcode: string;
     testname: string;
     price: string;
 }

@@ -25,16 +25,17 @@
                         No test is Selected yet
                     </td>
                 </tr>
-                <tr *ngFor="let test of this.gservice.pendingtest">
+                <tr *ngFor="let test of this.gservice.pendingtest; index as i" [attr.data-index]="i">
                     <td>{{test.testcode}}</td>
                     <td>{{test.testname}}</td>
                     <td>{{test.price}}</td>
+                    <td><a (click)="testindex(test,i)"><i class="fa fa-trash "></i></a></td>
                 </tr>
             </tbody>
         </table>
     </form>
     <!-- {{this.getuserID()}}userID -->
     <div class="mr-2 ml-2 mt-3 input-group-append justify-content-center row ">
-        <button class="btn btn-outline-success" (click)="this.gservice.geruserProfile()">Book Now</button>
+        <button class="btn btn-outline-success" (click)="this.gservice.getuserProfile()">Book Now</button>
     </div>
 </div>
