@@ -5,7 +5,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NotificationService } from '../notification.service';
-import { Address, marker } from '../shared/patient.model';
 import { PatientService } from '../shared/patient.service';
 @Component({
   selector: 'app-gmap',
@@ -17,11 +16,6 @@ export class GmapComponent implements OnInit {
     address: new FormControl(''),
     City: new FormControl(''),
   });
-
-
-
-  lat = 51.678418;
-  lng = 7.809007;
 constructor(public service:PatientService, public dialogRef: MatDialogRef<GmapComponent>,
   private notificationService: NotificationService,  ){}
   ngOnInit() {

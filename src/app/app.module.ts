@@ -42,6 +42,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MyLoaderComponent } from './home/my-loader/my-loader.component';
 import { LoaderInterceptorService } from './shared/interceptors/loader-interceptor.service';
+import { PreviousordersComponent } from './previousorders/previousorders.component';
+import {MatTableModule} from '@angular/material/table';
+import { OrderdetailsComponent } from './previousorders/orderdetails/orderdetails.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +69,9 @@ import { LoaderInterceptorService } from './shared/interceptors/loader-intercept
     PatientbucketComponent,
     PlaceorderComponent,
     GmapComponent,
-    MyLoaderComponent
+    MyLoaderComponent,
+    PreviousordersComponent,
+    OrderdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +92,7 @@ import { LoaderInterceptorService } from './shared/interceptors/loader-intercept
     MatProgressSpinnerModule,
     MatSnackBarModule,
     // AppRoutingModule,
-    
+    MatTableModule
   ],
   entryComponents : [ResultchartComponent],
   providers: [PatientService,

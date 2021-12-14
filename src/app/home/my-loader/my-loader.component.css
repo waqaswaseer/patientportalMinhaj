@@ -1,4 +1,4 @@
-.spinner {
+/* .spinner {
     width: 40px;
     height: 40px;
     background-color: #333;
@@ -49,4 +49,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
+
+@import "../../../assets/css/spinner/spinner.css"

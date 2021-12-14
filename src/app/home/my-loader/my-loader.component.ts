@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/shared/patient.service';
 
 @Component({
@@ -7,13 +7,10 @@ import { PatientService } from 'src/app/shared/patient.service';
   styleUrls: ['./my-loader.component.css']
 })
 export class MyLoaderComponent implements OnInit {
-
+  @Input() message = 'Please wait ...';
   loading: boolean;
 
-  constructor(private service:PatientService) {
-    this.service.isLoading.subscribe((x) => {
-      this.loading = x;
-    });
+  constructor() {
   }
   ngOnInit(): void {
   }}

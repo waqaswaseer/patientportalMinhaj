@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -21,6 +21,12 @@ export class PlaceorderComponent implements OnInit {
   options: Labtests[]
   filteredOptions: Observable<Labtests[]>;
   userprofile: usersignup
+  
+
+  hideloader = true;
+  btnclicked = false;
+
+
   displayFn(subject: any): string {
     return subject ? subject.testname : ''
   }
@@ -28,16 +34,14 @@ export class PlaceorderComponent implements OnInit {
     return rname ? rname.testname : '';
   }
 
-  lat = 51.678418;
-  lng = 7.809007;
-  googleMapType = 'satellite';
   constructor(public gservice: PatientService, public router: Router,
-    private notificationService: NotificationService,  public dialog: MatDialog) {
+    private notificationService: NotificationService, public dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.gservice.getcurrentOrderStatus(this.number);
   }
 
   createForm() {
@@ -50,29 +54,51 @@ export class PlaceorderComponent implements OnInit {
   private filter(inputStr: string): Labtests[] {
     return this.options.filter(option => option.testname.toLowerCase().includes(inputStr))
   }
-
   testselecion(event: MatAutocompleteSelectedEvent) {
+    this.gservice.showToggle = true;
     const selectedValue = event.option.value;
     this.Orderdetails.controls["testname"].setValue(selectedValue.testname);
     this.Orderdetails.controls["price"].setValue(selectedValue.price);
     this.Orderdetails.controls["testcode"].setValue(selectedValue.testcode);
   }
-  addtoBucket(Orderdetails: FormGroup, ) {
-    if (this.Orderdetails.valid) {
-      this.gservice.Orderdetails = this.Orderdetails.getRawValue()
-      console.log(this.gservice.Orderdetails)
+  addtoBucket(Orderdetails: FormGroup,) {
+    // if (this.Orderdetails.valid) {
+    this.btnclicked = true;
+    let obj = this.Orderdetails.getRawValue();
+    console.log(obj);
+    this.hideloader = false;
+    const chktestcode = this.gservice.pendingtest.map(x => x.testcode)
+    console.log(chktestcode)
+    if (!chktestcode.includes(obj.testcode)) {
+      this.gservice.pendingtest.push(obj)
+      // console.log(obj.testcode)
+      this.gservice.Orderdetails = obj;
       this.gservice.addtobucket().subscribe(Response => {
         if (Response != 0) {
           this.gservice.getPendingOrders();
-          this.notificationService.success('Your order For test' + this.Orderdetails.controls["testname"].value +
-          " is booked for now");
-        }
-        else {
+          this.notificationService.success('Your order For test ' + this.Orderdetails.controls["testname"].value +
+            " is booked for now");
           this.resetPage();
-          this.notificationService.warn(this.Orderdetails.controls["testname"].value + 'order is invalid or already booked');
+          this.hideloader = true;
+          this.btnclicked = false;
+          this.testname.reset('');
         }
-      })
+      });
     }
+    else {
+      this.hideloader = true;
+      this.btnclicked = false;
+      this.resetPage();
+      this.testname.reset('');
+      this.notificationService.warn('::Tests Already booked!')
+    }
+
+    // else{
+    //   this.gservice.Orderdetails = this.Orderdetails.getRawValue()
+    //   console.log(this.gservice.Orderdetails)
+    //   
+    // }
+
     //this.resetPage()
   }
 
@@ -84,14 +110,17 @@ export class PlaceorderComponent implements OnInit {
   resetPage() {
     this.Orderdetails = new FormGroup({
       username: new FormControl(this.username),
-      testcode: new FormControl(null),
-      testname: new FormControl(null),
-      price: new FormControl(null),
+      testcode: new FormControl('', Validators.required),
+      testname: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
     });
   }
 
   get username() {
     return localStorage.getItem('lspname')
+  }
+  get number() {
+    return localStorage.getItem('lsmobileno')
   }
   changeAddress() {
     this.dialog.open(GmapComponent).afterClosed().subscribe(res => {
@@ -99,7 +128,24 @@ export class PlaceorderComponent implements OnInit {
     }
     )
   }
-  checkout(){
+  checkout() {
+    //console.log(this.gservice.pendingtest.forEach)
+    this.gservice.showToggle = true;
+    let val =  this.gservice.pendingtest.filter(item=>item.orderid)
+      console.log (val[0].orderid);
+      this.gservice.updatetocheckout(val[0].orderid,this.username).subscribe((data: any) => {
+        console.log(data);
+        if (data == 1){
+          this.notificationService.success(':: Your Order is Successfully Placed')
+          this.gservice.getPendingOrders();
+          this.gservice.getcurrentOrderStatus(this.number);
+
+        }
+        else{
+          this.notificationService.warn('Something Went Wrong')
+          this.gservice.getPendingOrders();
+        }
+      })
     
   }
 }

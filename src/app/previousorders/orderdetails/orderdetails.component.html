@@ -5,7 +5,7 @@
                 <div class="service-iconh">
                     <span class="fa fa-user-md"></span>
                 </div>
-                <h4 class="panel-title">Patient Bucket</h4>
+                <h4 class="panel-title">Your Test was </h4>
             </div>
         </div>
     </div>
@@ -20,29 +20,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="this.gservice.pendingtest?.length==0" [class.text-danger]="this.gservice.pendingtest?.length==0">
+                <!-- <tr *ngIf="this.gservice.Orderdetails?.length==0" [class.text-danger]="this.gservice.Orderdetails?.length==0">
                     <td class="font-italic text-center mt-5" colspan="5">
                         No test is Booked for Now
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
-                    <td colspan="5">
+                    <td colspan="3">
                         <div class="center">
                             <app-my-loader [hidden]="this.gservice.hideloader"></app-my-loader>
                         </div>
                     </td>
                 </tr>
-                <tr *ngFor="let test of this.gservice.pendingtest; index as i" [attr.data-index]="i">
-                    <td>{{test.testcode}}</td>
-                    <td>{{test.testname}}</td>
-                    <td>{{test.price}}</td>
-                    <td><a (click)="testindex(test,i)"><i class="fa fa-trash "></i></a></td>
+                <tr *ngFor="let item of this.gservice.Orderdetails">
+                    <td scope="col">{{item.testcode}}</td>
+                    <td scope="col">{{item.testname}}</td>
+                    <td scope="col">{{item.price}}</td>
                 </tr>
             </tbody>
         </table>
     </form>
     <!-- {{this.getuserID()}}userID -->
-    <div class="mr-2 ml-2 mt-3 input-group-append justify-content-center row " [hidden]="this.gservice.button">
-        <button class="btn btn-outline-success" [disabled]="this.gservice.pendingtest?.length==0" (click)="this.gservice.getuserProfile()">Book Now</button>
+    <div class="mr-2 ml-2 mt-3 input-group-append justify-content-center row ">
+        <button class="btn btn-outline-success" (click)="close()">Hide Me</button>
     </div>
 </div>

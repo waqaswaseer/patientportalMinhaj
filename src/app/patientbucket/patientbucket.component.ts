@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { NotificationService } from '../notification.service';
 import { Labtests, PendingBasket, usersignup } from '../shared/patient.model';
 import { PatientService } from '../shared/patient.service';
 
@@ -12,9 +13,7 @@ import { PatientService } from '../shared/patient.service';
   styleUrls: ['./patientbucket.component.css']
 })
 export class PatientbucketComponent implements OnInit {
-  feedbacks = [1, 2, 3, 4, 5];
-  testsarray = this.gservice.pendingtest
-  constructor(public gservice: PatientService) { }
+  constructor(public gservice: PatientService, private notificationService: NotificationService) { }
   
   ngOnInit() {
     this.gservice.getPendingOrders();
@@ -25,17 +24,15 @@ export class PatientbucketComponent implements OnInit {
   }
   testindex(test,i: number) {
     this.gservice.showToggle = true;
-    var removed = this.gservice.pendingtest.splice(i, 1);
+    var removed = this.gservice.pendingtest.splice(i,1);
     console.log(test.orderid)
     this.gservice.deletesignlerecord(this.username,test.orderid,test.testcode).subscribe((data:any)=>{
-      this.gservice.pendingtest = data
+      console.log(data);
+      if (data == 1){
+        this.notificationService.success(':: Your Order is deleted...')
+        this.gservice.getPendingOrders(); 
+      }
     })
   }
-
-  // getPendingOrders() {
-  //   this.GetOrderdetails(this.username).subscribe((data: any) => {
-  //     this.pendingtest = data;
-  //   });
-  // }
 }
 

@@ -1,3 +1,221 @@
 .loginwidth {
     max-width: 500px;
 }
+
+.alignleft {
+    float: left;
+    margin-left: 20px;
+}
+
+.alignright {
+    float: right;
+    margin-right: 20px;
+}
+
+#headernewimage {
+    display: flex;
+    justify-content: center;
+}
+
+.headernewimage {
+    width: 40%;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand {
+        float: right;
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .intro-content {
+        padding: 150px 0 0;
+    }
+    div.example {
+        display: none;
+    }
+    #logohide {
+        display: none;
+    }
+    #newexample {
+        max-width: 30%;
+    }
+    .loginPage {
+        margin-top: 20px;
+    }
+    .tab-container {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    #headernewimage {
+        display: flex;
+        justify-content: center;
+        /* background-color: red; */
+    }
+    .headernewimage {
+        width: 40%;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width:481px) and (max-width:767px) {
+    #newexample {
+        display: none;
+    }
+    #logohide {
+        max-width: 35%;
+    }
+    .top-area p {
+        text-align: center;
+    }
+    .navbar.navbar-custom.navbar-fixed-top {
+        background-color: #fff;
+    }
+    .badge.custom-badge {
+        margin: 0 0 0 0;
+    }
+    .navbar-header button {
+        border-color: #ccc;
+        background-color: #eee;
+        padding: 5px 20px;
+    }
+    .navbar-header i {
+        color: #666;
+    }
+    .boxes3 {
+        width: 100%;
+    }
+    .navbar-custom ul.nav li {
+        border-bottom: 1px solid #eee;
+    }
+    .navbar-custom ul.nav li:last-child {
+        padding-bottom: 0;
+    }
+    .navbar-custom ul.nav ul.dropdown-menu li {
+        border-bottom: 1px solid #eee;
+        padding-left: 20px;
+    }
+    .service-box {
+        margin: 20px 0 30px;
+    }
+    .pricing-content.featured {
+        margin-top: 20px;
+    }
+    .pricing-content:hover {
+        margin-top: 20px;
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .cta-text {
+        float: none;
+        text-align: center;
+    }
+    .cta-btn {
+        float: none;
+        text-align: center;
+    }
+    .sub-footer p {
+        float: none;
+        text-align: center;
+    }
+    .sub-footer p {
+        float: none;
+        text-align: center;
+    }
+    div.example {
+        display: none;
+    }
+    .loginPage {
+        margin-top: 15px;
+    }
+    .tab-container {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .headernewimage {
+        width: 70%;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:480px) {
+    .navbar-custom .nav.navbar-nav {
+        background-color: rgba(255, 255, 255, .4);
+    }
+    .navbar.navbar-custom.navbar-fixed-top {
+        margin-bottom: 30px;
+    }
+    div.example {
+        display: none;
+    }
+    #newexample {
+        display: none;
+    }
+    #logohide {
+        max-width: 80%;
+    }
+    .box {
+        padding: 45px;
+    }
+    .box i {
+        margin-bottom: 30px;
+    }
+    .loginPage {
+        margin-top: 10px;
+    }
+    .tab-container {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .headernewimage {
+        width: 80%;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .formrow {
+        width: 100%;
+    }
+    .form-group1 {
+        width: 98%;
+        margin-right: 1%;
+        margin-left: 1%;
+    }
+}
+
+@media (max-width:320px) {
+    .navbar-brand {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
+    .intro-content {
+        padding: 250px 0 0;
+    }
+    div.example {
+        display: none;
+    }
+    #newexample {
+        display: none;
+    }
+    .loginPage {
+        margin-top: 10px;
+    }
+    .headernewimage {
+        width: 100%;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}

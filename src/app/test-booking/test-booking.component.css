@@ -1,0 +1,25 @@
+.screensize {
+    height: 100%;
+    position: relative;
+}
+
+.innerdiv {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 15px;
+}
+
+.bucketdiv {
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    padding: 8px 14px;
+    border-radius: 35px;
+    font-size: 12px;
+    text-align: center;
+}

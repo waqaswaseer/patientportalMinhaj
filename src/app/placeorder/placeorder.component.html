@@ -19,10 +19,16 @@
                 <input type="text" placeholder="Price" aria-label="Rate" formControlName="price" readonly>
             </div>
         </div>
-        <div class="btnbucket">
-            <button class="btn btn-outline-success" type="submit">Add To bucket</button>
+        <div class="center">
+            <app-my-loader [hidden]="hideloader"></app-my-loader>
+        </div>
+        <div class="btnbucket" [hidden]="btnclicked">
+            <button class="btn btn-outline-success" type="submit" [disabled]="this.Orderdetails.invalid">Add To bucket</button>
         </div>
     </form>
+</div>
+<div *ngFor="let item of this.gservice.userorder">
+    <p>Your last orderid is "<strong style="color: black; font-size: large;">{{item.orderid}}</strong>" and Booked at <strong>{{item.timewas}}</strong></p>
 </div>
 <div [hidden]="this.gservice.showToggle" class="col-md-12" id="form-wrapper1">
     <div class="form-wrapper">
@@ -38,6 +44,17 @@
     </div>
     <form class="example-form form2" [style.fontSize.px]="14 ">
         <table class="table" id="table">
+            <tr *ngIf="this.gservice.userprofile?.length==0" [class.text-danger]="this.gservice.userprofile?.length==0">
+                <td class="font-italic text-center mt-5" colspan="2">
+                    Please Select atleast one test
+                </td>
+
+                <div class="center">
+                    <app-my-loader [hidden]="this.gservice.hideloader1"></app-my-loader>
+                </div>
+
+
+            </tr>
             <tbody *ngFor="let user of this.gservice.userprofile">
                 <tr>
                     <th scope="col">PATIENT NAME:</th>
@@ -64,8 +81,8 @@
         </table>
     </form>
     <!-- {{this.getuserID()}}userID -->
-    <div class="btnbucket">
-        <button class="btn btn-outline-success" (click)="checkout()">Check Out</button>
+    <div class="btnbucket" [hidden]="this.gservice.button1">
+        <button class="btn btn-outline-success" (click)="checkout()" [hidden]="this.gservice.button">Check Out</button>
     </div>
 </div>
 

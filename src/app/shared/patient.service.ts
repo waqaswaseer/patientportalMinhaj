@@ -1,4 +1,4 @@
-import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail, Address } from './patient.model';
+import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail, Address, previousorders } from './patient.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Response } from "@angular/http";
@@ -50,6 +50,12 @@ export class PatientService {
   showToggle: Boolean = true;
   newaddress: Address;
   baseURL: any;
+  hideloader = false ;  
+  button = true;  
+  hideloader1 = false ;  
+  button1 = true;
+  userorders : previousorders;
+  userorder : previousorders[];
   //
   public isLoading = new BehaviorSubject(false);
   //
@@ -85,6 +91,10 @@ export class PatientService {
   deletesignlerecord(username: string | null, orderid: string, testcode: string) {
     return this.http.get(this.rootUrl() + 'api/delete/' + username + '/' + orderid + '/' + testcode);
   }
+
+  updatetocheckout(username: string | null, orderid: string) {
+    return this.http.get(this.rootUrl() + 'api/checkout/' + username + '/' + orderid);
+  }
   Getuserprofile(username: string | null): Observable<usersignup[]> {
     return this.http.get<usersignup[]>(this.rootUrl() + 'api/getuserProfile/' + username);
   }
@@ -93,6 +103,13 @@ export class PatientService {
   }
   GetOrderdetails(username: string | null): Observable<PendingBasket[]> {
     return this.http.get<PendingBasket[]>(this.rootUrl() + 'api/pendingbasket/' + username);
+  }
+  getAlluserorders(number: string | null): Observable<previousorders[]> {
+    return this.http.get<previousorders[]>(this.rootUrl() + 'api/userorders/' + number);
+  }
+  
+  getAlluserpreviousordersdetails(number: string | null): Observable<orderdetail[]> {
+    return this.http.get<orderdetail[]>(this.rootUrl() + 'api/user/orderetails/' + number);
   }
 
   addtobucket() {
@@ -112,7 +129,10 @@ export class PatientService {
     this.http.get(this.rootUrl() + "api/LabNoData/" + lno)
       .toPromise().then(res => this.labData = res as CurrentVisitData[]);
   }
-
+  getcurrentOrderStatus(number: string) {
+    this.http.get(this.rootUrl() + 'api/user/currentorder/' + number).toPromise()
+    .then(res=>{this.userorder = res as previousorders[]});
+  }
   GetOnlineCOde(pno: string): any {
     return this.http.get(this.rootUrl() + "api/getonlinecode/" + pno).toPromise();
     //console.log(this.gCode);
@@ -233,18 +253,29 @@ export class PatientService {
   get username() {
     return localStorage.getItem('lspname')
   }
-
-
-
-  getuserProfile() {
+  get number() {
+    return localStorage.getItem('lsmobileno')
+  }
+  
+    getuserProfile() {
     this.showToggle = false;
+    this.hideloader1 = true;
     this.Getuserprofile(this.username).subscribe((data: any) => {
       this.userprofile = data;
+      this.button1 = false;
+    });
+  }
+  getpreviousorders() {
+    this.showToggle = false;
+    this.getAlluserorders(this.number).subscribe((data: any) => {
+      this.userorders = data;
     });
   }
   getPendingOrders() {
     this.GetOrderdetails(this.username).subscribe((data: any) => {
       this.pendingtest = data;
+      this.hideloader = true ;
+      this.button = false;
     });
   }
   allVisitsList(pno: string) {
@@ -253,9 +284,9 @@ export class PatientService {
   }
   rootUrl(): any {
     this.baseURL = this.router['location']._platformLocation.location.origin
-    // return "http://localhost:7569/"
+    //return "http://182.180.114.149:1265/";
+    return "http://localhost:7569/"
     // if (this.baseURL.substring(0, 10) == "http://182")
-      return "http://http://182.180.114.149:1260/minhajlab/";
     // else
      // return "http://95.217.230.179:1260/minhajlab/";
   }

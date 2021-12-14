@@ -36,16 +36,12 @@ export class AbnormalTestResults {
 export class AllLabNo {
     computerno: string;
     visitno: string;
-
 }
-
 export class AllTestNames {
     testcode: string;
     testname: string;
 
 }
-
-
 export class PreviousResult {
     testcode: string;
     parametercode: string;
@@ -110,14 +106,20 @@ export class orderdetail {
     testcode: string;
     price: string;
 }
-export class marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
-}
 export class Address {
     username: string;
     address: string;
     city: string;
 }
+export class updaterecords
+{
+    username: string;
+    testcode: string;
+    teststatus: String;
+    orderid: string;
+}
+export class previousorders
+    {
+       orderid :string;
+       timewas :string;
+    } 
