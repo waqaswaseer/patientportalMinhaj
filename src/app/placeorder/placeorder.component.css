@@ -31,3 +31,17 @@
     margin-right: auto;
     width: 40%;
 }
+
+#basket-button {
+    display: none;
+}
+
+.mybtn {
+    border-radius: 12px;
+}
+
+@media (max-width:500) {
+    #basket-button {
+        display: button-basket;
+    }
+}

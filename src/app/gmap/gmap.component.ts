@@ -43,14 +43,14 @@ constructor(public service:PatientService, public dialogRef: MatDialogRef<GmapCo
   }
   resetForm() {
     this.newAddress = new FormGroup({
-      username: new FormControl(this.username),
+      username: new FormControl(this.phoneno),
       address: new FormControl(null, [Validators.required]),
       city: new FormControl(null, [Validators.required]),
      
     });
   }
-  get username() {
-    return localStorage.getItem('lspname')
+  get phoneno() {
+    return localStorage.getItem('lsmobileno')
   }
   closeDialogue(){
     this.dialogRef.close(GmapComponent)

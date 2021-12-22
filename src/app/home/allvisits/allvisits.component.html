@@ -1,69 +1,91 @@
 <div id="wrapper">
-  <div class="row">
-    <div class="col-md-12">
-      <app-tophead></app-tophead>
-    </div>  
-  </div>
-<div>
-  
-  
-  <div class="row"> 
-    <div class="col-md-12">
-      <div class="panel-body">
-      <table class="table">
-  <thead class="panel-heading" >
-    <tr>
-    <th>Lab No</th>
-    <th>Date</th>
-    <th class="example"><div class="example">Bill(Rs)</div></th>
-    <th class="example"><div class="example">Discount(Rs)</div></th>
-    <th class="example"><div class="example">Received(Rs)</div></th>
-    <th class="example"><div class="example">Balance(Rs)</div></th>
-    <th class="example"><div class="example">Location</div></th>
-    <th>    </th>
-  </tr>
-  </thead>
-  <tbody *ngFor="let pt of patientservice.list">
-    <tr>
-      <td (click)="populateForm(pt)">{{pt.labno}}</td>
-      <td (click)="populateForm(pt)">{{pt.sampledate}}</td>
-      <td class="example" (click)="populateForm(pt)"><div class="example">{{pt.totalbill}}</div></td>
-      <td class="example" (click)="populateForm(pt)"><div class="example">{{pt.discount}}</div></td>
-      <td class="example" (click)="populateForm(pt)"><div class="example">{{pt.receivedamount}}</div></td>
-      <td class="example" (click)="populateForm(pt)"><div class="example">{{pt.balance}}</div></td>
-      <td class="example" (click)="populateForm(pt)"><div class="example">{{pt.companyname}}</div></td>
-      <td (click)="loadBill(pt)"><a class="text-white"><i class="fa fa-book"></i></a></td>
-    </tr>
-<tr  *ngIf="pt.labno==clicklabno" >
-  <td colspan="9">
-    <table class="table">
-      <thead class="panel-heading">
-        <tr>
-          <th>Test Name</th>
-          <th>Status</th>
-          <th>    </th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let ld of patientservice.labData">
-      <tr>
-        <td>{{ld.testname}}</td>  
-        <td>
-            <div *ngIf='ld.rptstatus=="Ok"'><a class="text-white"><i class="fa fa-check"></i></a></div>
-            <div *ngIf='ld.rptstatus=="No"'><a class="text-white"><i class="fa fa-close"></i></a></div>
-        </td>
-        <td (click)="loadReport(ld)"><div *ngIf='ld.rptstatus=="Ok"'><a class="text-white"><i class="fa fa-print"></i></a></div> </td>
-      </tr>
-    </tbody>
-    </table>
-
-  </td>
-</tr>
+    <div class="row">
+        <div class="col-md-12">
+            <app-tophead></app-tophead>
+        </div>
+    </div>
+    <div>
 
 
-    </tbody>
-  </table>
-</div>
-</div>
-</div>
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead class="panel-heading">
+                            <tr>
+                                <th>Lab No</th>
+                                <th>Date</th>
+                                <th class="example">
+                                    <div class="example">Bill(Rs)</div>
+                                </th>
+                                <th class="example">
+                                    <div class="example">Discount(Rs)</div>
+                                </th>
+                                <th class="example">
+                                    <div class="example">Received(Rs)</div>
+                                </th>
+                                <th class="example">
+                                    <div class="example">Balance(Rs)</div>
+                                </th>
+                                <th class="example">
+                                    <div class="example">Location</div>
+                                </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let pt of patientservice.list">
+                            <tr>
+                                <td (click)="populateForm(pt)">{{pt.labno}}</td>
+                                <td (click)="populateForm(pt)">{{pt.sampledate}}</td>
+                                <td class="example" (click)="populateForm(pt)">
+                                    <div class="example">{{pt.totalbill}}</div>
+                                </td>
+                                <td class="example" (click)="populateForm(pt)">
+                                    <div class="example">{{pt.discount}}</div>
+                                </td>
+                                <td class="example" (click)="populateForm(pt)">
+                                    <div class="example">{{pt.receivedamount}}</div>
+                                </td>
+                                <td class="example" (click)="populateForm(pt)">
+                                    <div class="example">{{pt.balance}}</div>
+                                </td>
+                                <td class="example" (click)="populateForm(pt)">
+                                    <div class="example">{{pt.companyname}}</div>
+                                </td>
+                                <td (click)="loadBill(pt)"><a class="text-white"><i class="fa fa-book"></i></a></td>
+                            </tr>
+                            <tr *ngIf="pt.labno==clicklabno">
+                                <td colspan="9">
+                                    <table class="table">
+                                        <thead class="panel-heading">
+                                            <tr>
+                                                <th>Test Name</th>
+                                                <th>Status</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let ld of patientservice.labData">
+                                            <tr>
+                                                <td>{{ld.testname}}</td>
+                                                <td>
+                                                    <div *ngIf='ld.rptstatus=="Ok"'><a class="text-white"><i class="fa fa-check"></i></a></div>
+                                                    <div *ngIf='ld.rptstatus=="No"'><a class="text-white"><i class="fa fa-close"></i></a></div>
+                                                </td>
+                                                <td (click)="loadReport(ld)">
+                                                    <div *ngIf='ld.rptstatus=="Ok"'><a class="text-white"><i class="fa fa-print"></i></a></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

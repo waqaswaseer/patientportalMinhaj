@@ -1,15 +1,8 @@
-<div class="panel-heading">
-    <div class="service-iconh">
-        <span class="fa fa-user-md"></span>
-    </div>
-    <h4 class="panel-title">Previous Booked Test</h4>
-</div>
-<table mat-table [dataSource]="datasource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+<p>
+    <span class="fa fa-user-md"></span> Booked Tests
+    <a class="alignrignt" (click)="close()"><span class="material-icons">close</span></a>
+</p>
+<table mat-table [dataSource]="datasource">
     <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef> Serial No. </th>
         <td mat-cell *matCellDef="let element; index as i">{{i+1}} </td>
@@ -27,11 +20,10 @@
         <td mat-cell *matCellDef="let element"> {{element.timewas}} </td>
     </ng-container>
     <ng-container matColumnDef="viewdetails">
-        <th mat-header-cell *matHeaderCellDef> </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <a (click)="viewdetails(element.orderid)">View details <i  class="fa fa-eye" aria-hidden="true"></i></a></td>
+            <a (click)="viewdetails(element.orderid)">View <i  class="fa fa-eye" aria-hidden="true"></i></a></td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

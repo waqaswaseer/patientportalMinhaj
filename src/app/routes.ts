@@ -12,6 +12,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { TestBookingComponent } from './test-booking/test-booking.component';
 import { PatientbucketComponent } from './patientbucket/patientbucket.component';
+import { BooknowComponent } from './patientbucket/booknow/booknow.component';
 
 
 export const appRoutes: Routes = [
@@ -24,6 +25,7 @@ export const appRoutes: Routes = [
     { path: 'result-analysis', component: DbpreviousresultComponent,canActivate:[AuthGuard]},
     { path: 'patient-bucket', component: PatientbucketComponent,canActivate:[AuthGuard]},
     { path: 'test-booking', component: TestBookingComponent,canActivate:[AuthGuard]},
+    { path: 'booknow', component: BooknowComponent,canActivate:[AuthGuard]},
     { path : '', redirectTo:'/login', pathMatch : 'full'}
     
 ]

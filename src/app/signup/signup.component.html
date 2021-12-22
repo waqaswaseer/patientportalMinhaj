@@ -5,6 +5,9 @@
     <div id="form-wrapper " class="form-container">
         <p>
             <mat-toolbar>
+                <span class="material-icons">
+                    account_circle
+                    </span>
                 <span>User Registration</span>
             </mat-toolbar>
         </p>
@@ -12,8 +15,9 @@
             <div class="card-body">
                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                     <div class="mysignupForm">
-                        <div class="form-row">
-                            <div class="form-group2">
+                        <div>
+                            <div class="form-group2 form-row">
+                                <span class="material-icons">person</span>
                                 <input type="text" formControlName="username" class="form-control" placeholder="Type your Name" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                 <p class="lblError" *ngIf="signupForm.get('username').hasError('required')
                                     && !signupForm.get('username').pristine">
@@ -23,18 +27,19 @@
                         </div>
 
                         <div class="formrow">
-
-                            <div class="form-group1 nextrow">
+                            <div class="form-group1 form-row">
+                                <span class="material-icons">email</span>
                                 <input type="text" formControlName="email" email="true" placeholder="Type your email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                                 <p class="lblError" *ngIf="signupForm.get('email').hasError('required')
-                            && !signupForm.get('email').pristine">
+                                 && !signupForm.get('email').pristine">
                                     *Email is required</p>
                                 <p class="lblError" *ngIf="signupForm.get('email').hasError('email')
                                 && !signupForm.get('email').pristine">
                                     *Email is not valid
                                 </p>
                             </div>
-                            <div class="form-group1 nextrow">
+                            <div class="form-group1 form-row">
+                                <span class="material-icons">phone_android</span>
                                 <input type="text" formControlName="mobileno" maxlength="11" class="form-control" placeholder="Enter your phone no" [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }" />
                                 <p class="lblError" *ngIf="signupForm.get('mobileno').hasError('required')
                                 && !signupForm.get('mobileno').pristine">
@@ -43,7 +48,10 @@
                             </div>
                         </div>
                         <div class="formrow ">
-                            <div class="form-group1 nextrow">
+                            <div class="form-group1 form-row">
+                                <span class="material-icons">
+                                    lock
+                                    </span>
                                 <input type="password" formControlName="password" class="form-control" minlength="6" placeholder="Enter your password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                                 <p class="lblError" *ngIf="signupForm.get('password').hasError('required')
                                 && !signupForm.get('password').pristine">
@@ -53,7 +61,10 @@
                                     *Password contain 6 digits
                                 </p>
                             </div>
-                            <div class="form-group1 nextrow">
+                            <div class="form-group1 form-row">
+                                <span class="material-icons">
+                                    lock
+                                    </span>
                                 <input type="password" formControlName="user_confirmPassword" placeholder="Confirm your password " class="form-control" [ngClass]="{ 'is-invalid': submitted && f.user_confirmPassword.errors }" />
                                 <p class="lblError" *ngIf="signupForm.get('user_confirmPassword').hasError('required')
                                 && !signupForm.get('user_confirmPassword').pristine">
@@ -64,18 +75,9 @@
                                 </p>
                             </div>
                         </div>
-
-
-
-
-
-                        <!-- <div class="form-group form-check">
-                        <input type="text" formControlName="mobileno" id="mobileno" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }" />
-                        <label for="mobileno" class="form-check-label">Accept Terms & Conditions</label>
-                        <div *ngIf="submitted && f.mobileno.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
-                    </div> -->
                         <div class="formrow ">
-                            <div class="form-group1 nextrow">
+                            <div class="form-group1 form-row">
+                                <span class="material-icons">123</span>
                                 <input type="text" id="age" maxlength="2" placeholder="Age in Years" class="form-control" formControlName="age">
                                 <div *ngIf="submitted && f.age.errors" class="invalid-feedback">age is required</div>
                                 <p class="lblError" *ngIf="signupForm.get('age').hasError('required')
@@ -83,8 +85,9 @@
                                     *Provide age
                                 </p>
                             </div>
-                            <div class="colSignup form-group1 nextrow">
-                                <label>Gender</label>
+                            <div class="colSignup form-group1">
+                                <span class="material-icons">supervised_user_circle</span>
+                                <label style="font-size:small;margin-left: 10px;">Gender</label>
                                 <div class="genderdiv">
                                     <div class="gender">
                                         <input id="male" type="radio" value="male" name="gender" formControlName="gender">
@@ -96,7 +99,7 @@
                                         <label for="female">Female</label>
                                     </div>
                                     <p class="lblError" *ngIf="signupForm.get('gender').hasError('required')
-                                && !signupForm.get('gender').pristine">
+                                        && !signupForm.get('gender').pristine">
                                         *Gender is not mentioned
                                     </p>
                                 </div>
@@ -104,14 +107,17 @@
                         </div>
 
                         <div class="form-group2">
-                            <div id="lastinput" class="controls">
+                            <div id="lastinput " class="controls form-row">
+                                <span class="material-icons">home</span>
                                 <input type="text" id="address" placeholder="Provide Address" class="form-control" formControlName="address">
                                 <p class="lblError" *ngIf="signupForm.get('address').hasError('required')
                                       && !signupForm.get('address').pristine">
                                     *Address is Required
                                 </p>
                             </div>
-                            <div class="text-center ">
+                            <p>*All fields are Required.</p>
+                            <p><strong>Note:</strong> Account is valid only for one person </p>
+                            <div class="align-button">
                                 <button class="btn btn-primary alignright" type="submit" [disabled]="this.signupForm.invalid">Register</button>
                                 <button class="btn btn-secondary alignleft" type="reset" (click)="cancel()">Cancel</button>
                             </div>
@@ -120,115 +126,5 @@
                 </form>
             </div>
         </div>
-        <!-- 
-
-
-        <form [formGroup]="signupForm" (submit)="onSubmit()">
-            <div class="form-group">
-                <div class="controls">
-                    <input type="text" id="username" placeholder="Name" class="form-control" formControlName="username">
-                    <div *ngIf="f.username.touched && f.username.invalid" class="alert alert-danger">
-                        <div *ngIf="f.username.errors.required && f.username.errors.touched">Name is required.</div>
-                        <div *ngIf="f.username.errors.minlength">Name should be 3 character.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col colSignup">
-                    <div class="form-group">
-                        <div class="controls">
-                            <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email">
-                            <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
-                                <div *ngIf="f.email.errors.required && f.email.errors.touched">Email is required.</div>
-                                <div *ngIf="f.email.errors.minlength">Email should be 3 character.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col colSignup">
-                    <div class="form-group">
-
-                        <div class="controls">
-                            <input type="number" id="phone" placeholder="Phone" class="form-control" maxlength="11" formControlName="mobileno">
-                            <p class="lblError" *ngIf="signupForm.get('mobileno').hasError('required') && !signupForm.get('mobileno').pristine">
-                                Phone is Required
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" formGroupName="password_group">
-                <div class="col colSignup">
-                    <div class="form-group">
-                        <div class="control-group">
-
-                            <div class="controls">
-                                <input type="password" id="password" placeholder="Password" class="form-control" formControlName="password">
-                                <p class="lblError" *ngIf="signupForm.get('password_group').get('password').hasError('required') && !signupForm.get('password_group').get('password').pristine">
-                                    Password is Required
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col colSignup">
-                    <div class="form-group">
-                        <div class="control-group">
-
-                            <div class="controls">
-                                <input type="password" id="password_confirm" placeholder="Password (Confirm)" class="form-control" formControlName="user_confirmPassword">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col colSignup">
-                    <div class="form-group">
-                        <div class="control-group">
-
-                            <div class="controls">
-                                <input type="text" id="age" maxlength="2" placeholder="Age in Years" class="form-control" formControlName="age">
-                                <p class="lblError" *ngIf="signupForm.get('age').hasError('required') && !signupForm.get('age').pristine">
-                                    Phone is Required
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col colSignup">
-                    <label>Gender</label>
-                    <div class="genderdiv">
-                        <div class="gender">
-                            <input id="male" type="radio" value="male" name="gender" formControlName="gender">
-                            <label class="custom-control-label" for="male">Male</label>
-                        </div>
-
-                        <div class="gender">
-                            <input id="female" type="radio" value="female" name="gender" formControlName="gender">
-                            <label class="custom-control-label" for="female">Female</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <div class="controls">
-                    <input type="text" id="address" placeholder="Address" class="form-control" formControlName="address">
-                    <p class="lblError" *ngIf="signupForm.get('address').hasError('required')
-                              && !signupForm.get('address').pristine">
-                        Address is Required
-                    </p>
-                </div>
-            </div>
-            <div class="bg-info">
-                <button class="btn btn-primary alignleft" type="button" (click)="cancel()">Cancel</button>
-                <button class="btn btn-primary alignright" type="submit" [disabled]="signupForm.invalid">Sign Up</button>
-            </div>
-        </form>
     </div>
-</div> -->
+</div>

@@ -20,11 +20,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr *ngIf="this.gservice.Orderdetails?.length==0" [class.text-danger]="this.gservice.Orderdetails?.length==0">
-                    <td class="font-italic text-center mt-5" colspan="5">
-                        No test is Booked for Now
-                    </td>
-                </tr> -->
                 <tr>
                     <td colspan="3">
                         <div class="center">
@@ -35,13 +30,12 @@
                 <tr *ngFor="let item of this.gservice.Orderdetails">
                     <td scope="col">{{item.testcode}}</td>
                     <td scope="col">{{item.testname}}</td>
-                    <td scope="col">{{item.price}}</td>
+                    <td scope="col">{{item.rate}}</td>
                 </tr>
             </tbody>
         </table>
     </form>
     <!-- {{this.getuserID()}}userID -->
-    <div class="mr-2 ml-2 mt-3 input-group-append justify-content-center row ">
-        <button class="btn btn-outline-success" (click)="close()">Hide Me</button>
-    </div>
+    <a class="alignright" (click)="close()">Close</a>
+
 </div>

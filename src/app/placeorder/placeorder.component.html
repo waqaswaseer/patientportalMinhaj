@@ -1,10 +1,13 @@
 <div class="form-wrapper" id="form-wrapper">
     <div class="panel panel-skin">
         <div class="panel-heading">
-            <div class="service-iconh">
-                <span class="fa fa-user-md"></span>
-            </div>
-            <h4 class="panel-title">Availible Lab Tests</h4>
+            <h4 class="panel-title"><span class="fa fa-user-md"></span> Availible Lab Tests
+                <a (click)="orderview()" class="alignright">
+                    <p *ngIf="this.gservice.isMobile()">
+                        <mat-icon [matBadgeDisabled]="this.gservice.pendingtest.length==0" matBadge="{{this.gservice.pendingtest.length}}" matBadgeColor="warn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></mat-icon>
+                    </p>
+                </a>
+            </h4>
         </div>
     </div>
     <form class="example-form form2" [formGroup]="Orderdetails" [style.fontSize.px]="14" (ngSubmit)="addtoBucket(Orderdetails)">
@@ -25,65 +28,16 @@
         <div class="btnbucket" [hidden]="btnclicked">
             <button class="btn btn-outline-success" type="submit" [disabled]="this.Orderdetails.invalid">Add To bucket</button>
         </div>
+        <p>
+
+            <!-- Include text description of the icon's meaning for screen-readers -->
+
+        </p>
+
     </form>
 </div>
 <div *ngFor="let item of this.gservice.userorder">
     <p>Your last orderid is "<strong style="color: black; font-size: large;">{{item.orderid}}</strong>" and Booked at <strong>{{item.timewas}}</strong></p>
-</div>
-<div [hidden]="this.gservice.showToggle" class="col-md-12" id="form-wrapper1">
-    <div class="form-wrapper">
-        <div class="panel panel-skin">
-            <div class="panel-heading">
-                <div class="service-iconh">
-                    <span class="fa fa-user-md"></span>
-                </div>
-                <h4 class="panel-title">Check Out</h4>
-            </div>
-            <a class="editinfo" (click)="changeAddress()">Edit Address</a>
-        </div>
-    </div>
-    <form class="example-form form2" [style.fontSize.px]="14 ">
-        <table class="table" id="table">
-            <tr *ngIf="this.gservice.userprofile?.length==0" [class.text-danger]="this.gservice.userprofile?.length==0">
-                <td class="font-italic text-center mt-5" colspan="2">
-                    Please Select atleast one test
-                </td>
-
-                <div class="center">
-                    <app-my-loader [hidden]="this.gservice.hideloader1"></app-my-loader>
-                </div>
-
-
-            </tr>
-            <tbody *ngFor="let user of this.gservice.userprofile">
-                <tr>
-                    <th scope="col">PATIENT NAME:</th>
-                    <td [colSpan]="4">{{user.username}}</td>
-                </tr>
-                <tr>
-                    <th scope="col">AGE:</th>
-                    <td>{{user.age}}</td>
-                    <th scope="col">GENDER:</th>
-                    <td>{{user.gender}}</td>
-
-                </tr>
-                <tr>
-                    <th scope="col">PHONE NO:</th>
-                    <td>{{user.mobileno}}</td>
-                    <th scope="col">TOTAL BILL:</th>
-                    <td>Rs. {{user.password}}/-</td>
-                </tr>
-                <tr>
-                    <th scope="col">Patient Address:</th>
-                    <td [colSpan]="4">{{user.address}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-    <!-- {{this.getuserID()}}userID -->
-    <div class="btnbucket" [hidden]="this.gservice.button1">
-        <button class="btn btn-outline-success" (click)="checkout()" [hidden]="this.gservice.button">Check Out</button>
-    </div>
 </div>
 
 

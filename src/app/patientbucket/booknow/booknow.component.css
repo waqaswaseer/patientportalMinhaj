@@ -1,0 +1,6 @@
+@media (min-width:500) {
+    .btnbucket {
+        display: none;
+        align-items: center;
+    }
+}

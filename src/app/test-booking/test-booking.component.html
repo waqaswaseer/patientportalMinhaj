@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <app-placeorder></app-placeorder>
             </div>
-            <div class="col-md-6">
+            <div *ngIf="isMobileComponent()" class="col-md-6">
                 <app-patientbucket></app-patientbucket>
             </div>
         </div>

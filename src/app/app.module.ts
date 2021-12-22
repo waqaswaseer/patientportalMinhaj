@@ -45,6 +45,9 @@ import { LoaderInterceptorService } from './shared/interceptors/loader-intercept
 import { PreviousordersComponent } from './previousorders/previousorders.component';
 import {MatTableModule} from '@angular/material/table';
 import { OrderdetailsComponent } from './previousorders/orderdetails/orderdetails.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { BooknowComponent } from './patientbucket/booknow/booknow.component';
+import { MobileviewComponent } from './patientbucket/mobileview/mobileview.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,9 @@ import { OrderdetailsComponent } from './previousorders/orderdetails/orderdetail
     GmapComponent,
     MyLoaderComponent,
     PreviousordersComponent,
-    OrderdetailsComponent
+    OrderdetailsComponent,
+    BooknowComponent,
+    MobileviewComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +97,8 @@ import { OrderdetailsComponent } from './previousorders/orderdetails/orderdetail
     MatProgressSpinnerModule,
     MatSnackBarModule,
     // AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MatBadgeModule
   ],
   entryComponents : [ResultchartComponent],
   providers: [PatientService,

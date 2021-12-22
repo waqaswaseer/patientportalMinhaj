@@ -40,8 +40,7 @@ export class SignupComponent implements OnInit {
 });
   }
   onSubmit() {
-    console.log(this.signupForm.value);
-    
+    console.log(this.signupForm.value);    
       this.service.signup = this.signupForm.value
       console.log(this.signupForm.value);
       this.service.userSignUp().subscribe(Response => {
@@ -50,7 +49,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['login'])
         }
         else {
-          this.notificationService.warn(':: Invalid Data');
+          this.notificationService.warn(':: This account is already existed');
           this.resetForm();
         }
       })

@@ -1,28 +1,33 @@
-<p>
-    <mat-toolbar>
-        <span>Update Address</span>
-    </mat-toolbar>
-</p>
-<form [formGroup]="newAddress" id="newAddress" (ngSubmit)="onSubmit(newAddress)">
-    <div class="form-group">
-        <div class="controls">
-            <input type="text" id="address" placeholder="Address" class="form-control" formControlName="address">
-            <p class="lblError" *ngIf="newAddress.get('address').hasError('required')
-                              && !newAddress.get('address').touched">
-                Only Patient Address is Required
-            </p>
+<div class="gmapcomponent">
+    <p>
+        <mat-toolbar>
+            <span class="material-icons">
+            home
+            </span>
+            <span>Update Address</span>
+        </mat-toolbar>
+    </p>
+    <form [formGroup]="newAddress" id="newAddress" (ngSubmit)="onSubmit(newAddress)">
+        <div class="form-group">
+            <div class="controls">
+                <input type="text" id="address" placeholder="Address" class="form-control" formControlName="address">
+                <p *ngIf="newAddress.get('address').hasError('required')
+                              && newAddress.get('address').touched" class="lblError">
+                    Only Patient Address is Required
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="controls">
-            <input type="text" id="city" placeholder="City" class="form-control" formControlName="city">
-            <p class="lblError" *ngIf="newAddress.get('city').hasError('required') && !newAddress.get('city').touched">
-                Please provide your Valid City Name
-            </p>
+        <div class="form-group">
+            <div class="controls">
+                <input type="text" id="city" placeholder="City" class="form-control" formControlName="city">
+                <p *ngIf="newAddress.get('city').hasError('required') && newAddress.get('city').touched" class="lblError">
+                    Please provide your Valid City Name
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="bg-info">
-        <button class="btn btn-primary alignleft" type="submit" (click)="closeDialogue()">Cancel</button>
-        <button class="btn btn-primary alignright" type="submit" [disabled]="newAddress.invalid">Update</button>
-    </div>
-</form>
+        <div class="bg-info">
+            <button class="btn btn-primary alignleft" type="submit" (click)="closeDialogue()">Cancel</button>
+            <button class="btn btn-primary alignright" type="submit" [disabled]="newAddress.invalid">Update</button>
+        </div>
+    </form>
+</div>

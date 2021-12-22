@@ -21,12 +21,15 @@ export class PreviousordersComponent implements OnInit {
 
   }
   getpreviousorders() {
-    this.gservice.getAlluserorders(this.number).subscribe((data: any) => {
+    this.gservice.getAlluserorders(this.id).subscribe((data: any) => {
       this.datasource = new MatTableDataSource(data)
     });
   }
-  get number() {
-    return localStorage.getItem('lsmobileno')
+  close(){
+    this.matDialogue.close()
+  }
+  get id() {
+    return localStorage.getItem('userID')
   }
   viewdetails(id: any) {
     this.gservice.getAlluserpreviousordersdetails(id).subscribe((data: any) => {
@@ -38,5 +41,10 @@ export class PreviousordersComponent implements OnInit {
   }
   opendialog(){
     this.dialog.open(OrderdetailsComponent)
+  }
+  isMobileComponent() {
+    // this.component;
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return width > 770;
   }
 }

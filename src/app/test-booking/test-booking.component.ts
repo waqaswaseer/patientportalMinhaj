@@ -9,15 +9,16 @@ import { PatientService } from '../shared/patient.service';
   styleUrls: ['./test-booking.component.css']
 })
 export class TestBookingComponent implements OnInit {
-
+  component = true;
   constructor(private gservice:PatientService, private dialog: MatDialog, ) { }
 
   ngOnInit(): void {
+    this.gservice.getPendingOrders();
   }
   prevousorders(){
     let dialoguconfig = new MatDialogConfig();
-    dialoguconfig.height = '60%';
-    dialoguconfig.width = '70%';
+    dialoguconfig.height = 'auto';
+    dialoguconfig.width = '85%';
     this.dialog.open(PreviousordersComponent,dialoguconfig).afterClosed().subscribe(res=>{
       this.gservice.userorders = res;
     }
@@ -25,5 +26,10 @@ export class TestBookingComponent implements OnInit {
   }
   get number() {
     return localStorage.getItem('lsmobileno')
+  }
+  isMobileComponent() {
+    this.component;
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return width > 770;
   }
 }

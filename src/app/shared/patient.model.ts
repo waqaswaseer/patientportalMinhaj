@@ -79,6 +79,7 @@ export class usersignup {
     address: string;
 }
 export class patientlogin {
+    userID: string;
     firstname: string;
     patientno: string;
     mobileno: string;
@@ -88,13 +89,19 @@ export class patientlogin {
     address1: string;
 }
 export class Labtests {
+    code: string;
+    testname: string;
+}
+export class LabtestDetail {
     testcode: string;
     testname: string;
-    price: string;
-    specimen: string;
+    rate : number;
+    samplereq : string;
+    orderid:string
 }
+
 export class PendingBasket {
-    username:string;
+    phoneno:string;
     orderid: string;
     testcode: string;
     testname: string;
@@ -104,7 +111,7 @@ export class orderdetail {
     username: string;
     testname: string;
     testcode: string;
-    price: string;
+    rate: number;
 }
 export class Address {
     username: string;

@@ -23,3 +23,9 @@
     font-size: 12px;
     text-align: center;
 }
+
+@media (min-width:768) {
+    #patientbucket {
+        display: none;
+    }
+}

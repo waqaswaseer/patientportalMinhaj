@@ -22,13 +22,15 @@ export class AllvisitsComponent implements OnInit {
 
   ngOnInit() {
     var patientno =  localStorage.getItem("lspatientno");
+
     this.patientservice.allVisitsList(patientno);
-    //console.log(patientno);
+    console.log(patientno);
     //this.patientservice.userloging = patientno;
   }
 
   populateForm(pt: Patient) {
     this.rowexp = true;
+    console.log('labno is '+pt.labno)
     if (this.clicklabno == pt.labno)
     {
       this.clicklabno = "0";

@@ -15,7 +15,8 @@ export class TopheadComponent implements OnInit {
 
     console.log(this.patientservice.userloging);
     console.log(this.loginchk);
-    console.log(this.pname);
+    console.log(this.pmobileno);
+    console.log('my userid '+this.userid);
   }
 
   get loginchk(): any {
@@ -24,6 +25,9 @@ export class TopheadComponent implements OnInit {
 
 get pname(): any {
   return localStorage.getItem('lspname');
+}
+get userid(): any {
+  return localStorage.getItem('userID');
 }
 
 get page(): any {
@@ -50,6 +54,7 @@ testwiseresults(){
   this.router.navigate(['result-analysis']);
 }
 testbooking(){
+  this.patientservice.showToggle = true;
   this.router.navigate(['test-booking']);
 }
 

@@ -12,3 +12,10 @@ p {
     color: red;
     font-size: small;
 }
+
+@media (max-width:770) {
+    .gmapcomponent {
+        width: 50%;
+        background-color: black;
+    }
+}

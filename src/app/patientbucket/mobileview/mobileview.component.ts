@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { NotificationService } from '../notification.service';
-import { Labtests, PendingBasket, usersignup } from '../shared/patient.model';
-import { PatientService } from '../shared/patient.service';
+import { NotificationService } from 'src/app/notification.service';
+import { PatientService } from 'src/app/shared/patient.service';
 
 @Component({
-  selector: 'app-patientbucket',
-  templateUrl: './patientbucket.component.html',
-  styleUrls: ['./patientbucket.component.css']
+  selector: 'app-mobileview',
+  templateUrl: './mobileview.component.html',
+  styleUrls: ['./mobileview.component.css']
 })
-export class PatientbucketComponent implements OnInit {
+export class MobileviewComponent implements OnInit {
   constructor(public gservice: PatientService, private notificationService: NotificationService,
-    public router: Router) { }
+    public dialogref: MatDialogRef<MobileviewComponent>, public router: Router) { }
   
   ngOnInit() {
     this.gservice.getPendingOrders();
@@ -38,6 +33,7 @@ export class PatientbucketComponent implements OnInit {
         this.gservice.getPendingOrders();
         if(this.gservice.pendingtest.length == 0){
           this.router.navigate(['test-booking'])
+          this.dialogref.close();     
         }
       }
     })
@@ -45,7 +41,7 @@ export class PatientbucketComponent implements OnInit {
   checkout(){
     this.gservice.getuserProfile();
     this.router.navigate(['booknow']);
-    // this.dialogrerf.close();     
+    this.dialogref.close();     
   }
 }
 

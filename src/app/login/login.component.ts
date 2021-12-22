@@ -28,6 +28,7 @@ userClaims: any;
      localStorage.setItem('userToken',data.access_token);
      this.PatientService.getUserClaims().subscribe((data: any) => {
       this.userClaims = data;
+      console.log(data);
       this.PatientService.userloging = this.userClaims.patientno;
       localStorage.setItem("lspatientno", this.userClaims.patientno);
       localStorage.setItem("lspname", this.userClaims.firstname);
@@ -35,6 +36,7 @@ userClaims: any;
       localStorage.setItem("lsage", this.userClaims.age);
       localStorage.setItem("lsmobileno", this.userClaims.mobileno);
       localStorage.setItem("lsaddress", this.userClaims.address1);      
+      localStorage.setItem("userID", this.userClaims.userID);      
       this.router.navigate(['/home']);
     });
 

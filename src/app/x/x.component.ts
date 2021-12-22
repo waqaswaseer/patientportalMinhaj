@@ -39,6 +39,7 @@ export class XComponent implements OnInit {
       this.PatientService.strage = this.userClaims.age;
       this.PatientService.strgender = this.userClaims.gendername;
       this.PatientService.strpatientno = this.userClaims.patientno;
+      this.PatientService.strpatientno = this.userClaims.userID;
 
       console.log('name',this.userClaims.firstname);
       localStorage.setItem("sspatientno", this.userClaims.patientno);
@@ -50,6 +51,7 @@ export class XComponent implements OnInit {
       localStorage.setItem("lsage", this.userClaims.age);
       localStorage.setItem("lsmobileno", this.userClaims.mobileno);
       localStorage.setItem("lsaddress", this.userClaims.address1);
+      localStorage.setItem("userID", this.userClaims.userID);
       
       this.router.navigate(['/home']);
     });

@@ -39,7 +39,8 @@ layout
 }
 
 .colSignup {
-    width: 50%;
+    display: flex;
+    align-items: center;
 }
 
 .radio_buton {
@@ -498,8 +499,8 @@ Navigation
 
 .navbar-toggle {
     padding: 4px 6px;
-    font-size: 14px;
-    color: #fff;
+    font-size: 26px;
+    color: rgb(184, 0, 0);
 }
 
 .navbar-toggle:focus,
@@ -1137,10 +1138,11 @@ p.lead-footer {
 }
 
 .panel-heading {
-    padding: 10px;
+    /* padding: 10px; */
     border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 45px;
 }
 
 .chart-container {
@@ -1169,7 +1171,7 @@ canvas {
 }
 
 .form-wrapper h3.panel-title {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 300;
 }
 
@@ -2545,6 +2547,9 @@ a.btn:focus {
         margin-top: 5px;
         margin-bottom: 10px;
     }
+    .primary-btn-width {
+        width: 100px;
+    }
 }
 
 @media (max-width:480px) {
@@ -2590,6 +2595,9 @@ a.btn:focus {
         margin-right: 1%;
         margin-left: 1%;
     }
+    .primary-btn-width {
+        width: 120px;
+    }
 }
 
 @media (max-width:320px) {
@@ -2615,5 +2623,8 @@ a.btn:focus {
         height: auto;
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    .primary-btn-width {
+        width: 100px;
     }
 }

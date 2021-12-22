@@ -1,0 +1,7 @@
+.alignrignt {
+    float: right;
+}
+
+.row {
+    flex-direction: row;
+}

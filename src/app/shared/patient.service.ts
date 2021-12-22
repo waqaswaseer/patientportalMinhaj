@@ -1,4 +1,4 @@
-import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail, Address, previousorders } from './patient.model';
+import { Patient, CurrentVisitData, AbnormalTestResults, AllLabNo, PreviousResult, AllTestNames, SingleTestResult, Getonlinecode, usersignup, Labtests, PendingBasket, orderdetail, Address, previousorders, LabtestDetail } from './patient.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Response } from "@angular/http";
@@ -30,7 +30,7 @@ export class PatientService {
   strmobileno: string = '';
   strpatientno: string = '';
   Orderdetails: orderdetail;
-
+  userid:string
   formData: Patient;
   list: Patient[];
   newlist: CurrentVisitData[];
@@ -45,33 +45,40 @@ export class PatientService {
   signup: usersignup[]
   alltest: Labtests[]
   deleterecord: PendingBasket;
-  pendingtest: PendingBasket[] = []
+  pendingtest: LabtestDetail[] = []
   userprofile: usersignup[]
   showToggle: Boolean = true;
   newaddress: Address;
   baseURL: any;
   hideloader = false ;  
-  button = true;  
   hideloader1 = false ;  
+  button = true;  
   button1 = true;
   userorders : previousorders;
   userorder : previousorders[];
+  totalbill: any;
+  public component = true;
+  public isMobileLayout = false;
   //
   public isLoading = new BehaviorSubject(false);
   //
   // readonly rootUrl = 'http://localhost:7569/'; 
   //'http://182.180.114.149:1260/patientapi/';
   // readonly rootUrl = 'http://103.62.233.169:5685/';
-  constructor(private http: HttpClient, public router: Router) { }
+  constructor(private http: HttpClient, public router: Router) { 
+    window.onresize = () => this.component = window.innerWidth >= 768;
+
+  }
 
   userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded',
+    'No-Auth': 'True' });
     return this.http.post(this.rootUrl() + 'token', data, { headers: reqHeader });
   }
 
   getUserClaims() {
-    return this.http.get(this.rootUrl() + '/api/GetUserClaims', {
+    return this.http.get(this.rootUrl() + 'api/GetUserClaims', {
       headers: new HttpHeaders(
         { 'Authorization': 'Bearer ' + localStorage.getItem('userToken') })
     });
@@ -88,12 +95,12 @@ export class PatientService {
     };
     return this.http.post(this.rootUrl() + 'api/newaddress', body);
   }
-  deletesignlerecord(username: string | null, orderid: string, testcode: string) {
-    return this.http.get(this.rootUrl() + 'api/delete/' + username + '/' + orderid + '/' + testcode);
+  deletesignlerecord(userid: string | null, orderid: string, testcode: string) {
+    return this.http.get(this.rootUrl() + 'api/delete/' + userid + '/' + orderid + '/' + testcode);
   }
 
-  updatetocheckout(username: string | null, orderid: string) {
-    return this.http.get(this.rootUrl() + 'api/checkout/' + username + '/' + orderid);
+  updatetocheckout(orderid: string) {
+    return this.http.get(this.rootUrl() + 'api/checkout/' + orderid);
   }
   Getuserprofile(username: string | null): Observable<usersignup[]> {
     return this.http.get<usersignup[]>(this.rootUrl() + 'api/getuserProfile/' + username);
@@ -101,20 +108,26 @@ export class PatientService {
   GetAlllabtest(): Observable<Labtests[]> {
     return this.http.get<Labtests[]>(this.rootUrl() + 'api/labtests');
   }
-  GetOrderdetails(username: string | null): Observable<PendingBasket[]> {
-    return this.http.get<PendingBasket[]>(this.rootUrl() + 'api/pendingbasket/' + username);
+
+  GetlabtestDetail(code : string): Observable<LabtestDetail[]> {
+    return this.http.get<LabtestDetail[]>(this.rootUrl() + 'api/getTestrate/'  + code);
   }
-  getAlluserorders(number: string | null): Observable<previousorders[]> {
-    return this.http.get<previousorders[]>(this.rootUrl() + 'api/userorders/' + number);
+
+  GetOrderdetails(id: string | null): Observable<LabtestDetail[]> {
+    return this.http.get<LabtestDetail[]>(this.rootUrl() + 'api/pendingbasket/' + id);
+  }
+  getAlluserorders(id: string | null): Observable<previousorders[]> {
+    return this.http.get<previousorders[]>(this.rootUrl() + 'api/userorders/' + id);
   }
   
   getAlluserpreviousordersdetails(number: string | null): Observable<orderdetail[]> {
     return this.http.get<orderdetail[]>(this.rootUrl() + 'api/user/orderetails/' + number);
   }
 
-  addtobucket() {
+  addtobucket(obj) {
     var body = {
-      ...this.Orderdetails,
+      userid:this.userid,
+      ...obj,
     };
     return this.http.post(this.rootUrl() + 'api/Bookorder', body);
   }
@@ -129,8 +142,8 @@ export class PatientService {
     this.http.get(this.rootUrl() + "api/LabNoData/" + lno)
       .toPromise().then(res => this.labData = res as CurrentVisitData[]);
   }
-  getcurrentOrderStatus(number: string) {
-    this.http.get(this.rootUrl() + 'api/user/currentorder/' + number).toPromise()
+  getcurrentOrderStatus(id: string) {
+    this.http.get(this.rootUrl() + 'api/user/currentorder/' + id).toPromise()
     .then(res=>{this.userorder = res as previousorders[]});
   }
   GetOnlineCOde(pno: string): any {
@@ -163,7 +176,14 @@ export class PatientService {
     this.http.get(this.rootUrl() + "api/GetAllTestName/" + pno)
       .toPromise().then(res => this.aTests = res as AllTestNames[]);
   }
-
+  
+  
+  isMobile() {
+    this.isMobileLayout;
+    this.component = false;
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return width < 770;
+  }
   SingleTestResults(pno: string, testcode: string) {
     // let Linechart = [];
     // let Player = [];
@@ -253,6 +273,9 @@ export class PatientService {
   get username() {
     return localStorage.getItem('lspname')
   }
+  get id() {
+    return localStorage.getItem('userID')
+  }
   get number() {
     return localStorage.getItem('lsmobileno')
   }
@@ -260,32 +283,35 @@ export class PatientService {
     getuserProfile() {
     this.showToggle = false;
     this.hideloader1 = true;
-    this.Getuserprofile(this.username).subscribe((data: any) => {
-      this.userprofile = data;
-      this.button1 = false;
-    });
+    this.totalbill_()
   }
   getpreviousorders() {
-    this.showToggle = false;
-    this.getAlluserorders(this.number).subscribe((data: any) => {
+    this.getAlluserorders(this.id).subscribe((data: any) => {
       this.userorders = data;
     });
   }
   getPendingOrders() {
-    this.GetOrderdetails(this.username).subscribe((data: any) => {
+    this.GetOrderdetails(this.id).subscribe((data: any) => {
       this.pendingtest = data;
       this.hideloader = true ;
       this.button = false;
     });
   }
   allVisitsList(pno: string) {
-    this.http.get(this.rootUrl + pno)
+    this.http.get(this.rootUrl() + pno)
       .toPromise().then(res => this.list = res as Patient[]);
   }
+  totalbill_(){
+    let sum = 0 ;
+    this.getpreviousorders();
+    
+    this.totalbill = this.pendingtest.reduce((a,b)=>Number(a)+ Number(b.rate),sum)
+    console.log(this.totalbill)
+  }
   rootUrl(): any {
-    this.baseURL = this.router['location']._platformLocation.location.origin
-    //return "http://182.180.114.149:1265/";
-    return "http://localhost:7569/"
+    this.baseURL = this.router['location']._platformLocation.location.origin;
+    return "http://182.180.114.149:1265/";
+    //return "http://localhost:7569/";
     // if (this.baseURL.substring(0, 10) == "http://182")
     // else
      // return "http://95.217.230.179:1260/minhajlab/";

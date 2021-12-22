@@ -1,5 +1,5 @@
-.btn-Container {
-    justify-content: center;
+.loginwidth {
+    max-width: 500px;
 }
 
 .alignleft {
@@ -12,18 +12,10 @@
     margin-right: 20px;
 }
 
-.btncode {
-    align-self: flex-end;
-    background-color: aqua;
-}
-
-.loginwidth {
-    max-width: 500px;
-}
-
 #headernewimage {
     display: flex;
     justify-content: center;
+    background-color: rgb(199, 199, 199);
 }
 
 .headernewimage {
@@ -31,6 +23,20 @@
     height: auto;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+.primary-btn-width {
+    width: 150px;
+}
+
+.loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginform {
+    width: 60%;
 }
 
 @media (min-width: 768px) {
@@ -62,13 +68,19 @@
     #headernewimage {
         display: flex;
         justify-content: center;
-        /* background-color: red; */
+        background-color: rgb(197, 197, 197);
     }
     .headernewimage {
-        width: 40%;
+        width: 46%;
         height: auto;
         margin-top: 5px;
         margin-bottom: 10px;
+    }
+    .primary-btn-width {
+        width: 125px;
+    }
+    .loginform {
+        width: 70%;
     }
 }
 
@@ -156,6 +168,12 @@
         margin-top: 5px;
         margin-bottom: 10px;
     }
+    .primary-btn-width {
+        width: 110px;
+    }
+    .loginform {
+        width: 90%;
+    }
 }
 
 @media (max-width:480px) {
@@ -188,7 +206,7 @@
         margin-right: 2%;
     }
     .headernewimage {
-        width: 80%;
+        width: 96%;
         height: auto;
         margin-top: 5px;
         margin-bottom: 10px;
@@ -200,6 +218,12 @@
         width: 98%;
         margin-right: 1%;
         margin-left: 1%;
+    }
+    .primary-btn-width {
+        width: 98px;
+    }
+    .loginform {
+        width: 96%;
     }
 }
 
@@ -226,5 +250,11 @@
         height: auto;
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    .primary-btn-width {
+        width: 80px;
+    }
+    .loginform {
+        width: 100%;
     }
 }
